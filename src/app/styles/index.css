@@ -1,0 +1,16 @@
+@import "reset.css";
+@import "variables/global.css";
+@import "theme.css";
+
+
+.app,
+.app_modal,
+.app_drawer {
+    font-size: var(--font-m);
+    color: var(--primary-color);
+}
+
+.app {
+    background: var(--primary-bg-color);
+    min-height: 100vh;
+}

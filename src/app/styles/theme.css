@@ -1,0 +1,22 @@
+.app {
+    --primary-bg-color: #ffffff;
+    --secondary-bg-color: #000000;
+    --third-bg-color: #edf0f2;
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --third-color: #65707b;
+
+/*skeleton*/
+    --skeleton-color: #fff;
+    --skeleton-shadow: rgba(0 0 0 / 15%);
+
+/*btn */
+    --primary-btn-bg: #000000;
+    --secondary-btn-bg: #ffffff;
+    --hovered-btn-bg: #65707b;
+    --primary-accent-btn-bg: #d81b3b;
+    --secondary-accent-btn-bg: #3fcbff;
+
+/*card*/
+    --card-bg: #d81b3b;
+}
