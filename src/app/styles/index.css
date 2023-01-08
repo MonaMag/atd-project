@@ -6,11 +6,15 @@
 .app,
 .app_modal,
 .app_drawer {
-    font-size: var(--font-m);
+    font-size: var(--font-s);
     color: var(--primary-color);
 }
 
 .app {
-    background: var(--primary-bg-color);
+    background: var(--base-bg-color);
     min-height: 100vh;
+}
+
+.content-page {
+    display: flex;
 }
