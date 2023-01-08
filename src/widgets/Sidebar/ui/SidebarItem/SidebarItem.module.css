@@ -1,0 +1,13 @@
+.item {
+    display: flex;
+    align-items: center;
+}
+
+.link {
+    margin-left: 10px;
+    opacity: 1;
+}
+
+.icon {
+    fill: var(--secondary-color);
+}
