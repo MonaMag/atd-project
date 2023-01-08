@@ -1,14 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit'
-import {StateSchema} from "./StateSchema";
-import {userReducer} from "../../../entities/User/model/slice/userSlice";
-
+import { configureStore } from '@reduxjs/toolkit';
+import { StateSchema } from './StateSchema';
+import { userReducer } from 'entities/User';
 
 export const store = configureStore<StateSchema>({
     reducer: {
-       user: userReducer,
+        user: userReducer,
     },
-    devTools: process.env.NODE_ENV === "development", //disable redux dev tools in PROD
-})
+    devTools: process.env.NODE_ENV === 'development', //disable redux dev tools in PROD
+});
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
