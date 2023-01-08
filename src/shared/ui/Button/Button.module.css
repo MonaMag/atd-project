@@ -1,3 +1,98 @@
-.btn {
-    width: 250px;
+.Button {
+    cursor: pointer;
+    color: var(--secondary-color);
+    padding: 6px 30px;
+    font: var(--font-s);
+}
+
+.Button:hover {
+    opacity: 0.8;
+    fill-opacity: 0.8;
+    stroke-opacity: 0.8;
+}
+
+.clear {
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+    color: var(--primary-color);
+}
+.clearInverted {
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+    color: var(--secondary-color);
+}
+.clearRed {
+    padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+    color: var(--accent-btn-color);
+}
+.outline {
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    background: none;
+}
+
+.background {
+    background: var(--secondary-bg-color);
+    color: var(--secondary-color);
+    border: none;
+}
+
+.backgroundHovered {
+    background: var(--hovered-btn-bg);
+    color: var(--secondary-color);
+    border: none;
+}
+.backgroundRed {
+    background: var(--third-accent-btn-bg);
+    color: var(--secondary-color);
+    border: none;
+}
+.backgroundBlue {
+    background: var(--primary-accent-btn-bg);
+    color: var(--secondary-color);
+    border: none;
+}
+.backgroundGreen {
+    background: var(--secondary-accent-btn-bg);
+    color: var(--secondary-color);
+    border: none;
+}
+
+.size_xs {
+    height: 40px;
+    border-radius: 100px;
+    padding: 8px 16px;
+}
+
+.size_s {
+    height: 40px;
+    border-radius: 27px;
+    padding: 8px 16px;
+}
+
+.size_m {
+    height: 60px;
+    border-radius: 50px;
+    padding: 14px 45px 14px 25px;
+}
+
+.size_l {
+    height: 60px;
+    border-radius: 50px;
+    padding: 19px 45px;
+}
+
+.disabled {
+    opacity: 0.5;
+}
+
+.fullWidth {
+    width: 100%;
 }
