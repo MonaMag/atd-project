@@ -1,0 +1,11 @@
+.AppLink {
+    color: var(--secondary-color);
+}
+
+.AppLink:hover {
+    opacity: 0.8;
+}
+
+.active {
+    background-color: var(--select-bg-color);
+}
