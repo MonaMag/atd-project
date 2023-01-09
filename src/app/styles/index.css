@@ -18,3 +18,9 @@
 .content-page {
     display: flex;
 }
+
+.page {
+    margin-left: 278px;
+    width: 100%;
+    height: 100%;
+ }

@@ -4,11 +4,13 @@ import { routeConfig } from '../config/routeConfig';
 
 const AppRouter = () => {
     return (
-        <Routes>
-            {Object.values(routeConfig).map(({ path, element }) => (
-                <Route key={path} path={path} element={element} />
-            ))}
-        </Routes>
+        <div className="page">
+            <Routes>
+                {Object.values(routeConfig).map(({ path, element }) => (
+                    <Route key={path} path={path} element={element} />
+                ))}
+            </Routes>
+        </div>
     );
 };
 

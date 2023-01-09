@@ -22,6 +22,9 @@ export const Sidebar = ({ className }: SidebarProps) => {
                 <AppLink to={'/profile'} className={cls.link}>
                     Профиль
                 </AppLink>
+                <AppLink to={'/users'} className={cls.link}>
+                    Пользователи
+                </AppLink>
                 <AppLink to={'/'} className={cls.link}>
                     Аудиторные Сегменты
                 </AppLink>

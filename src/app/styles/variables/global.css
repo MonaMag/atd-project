@@ -27,12 +27,13 @@
     --font-xxl: var(--font-size-xxl) / var(--font-line-xxl) var(--font-family-main);
 
 /*Размеры*/
-    --height-xs: 40px;
-    --height-s: 60px;
+    --sidebar-widght: 278px;
+    --btn-height-xs: 40px;
+    --btn-height-s: 60px;
 /*Индекс*/
     --modal-z-index: 1000;
-    --overlay-z-index: 100;
+    --overlay-z-index: 10;
 
 /*Цвета*/
-
+    --overlay-color: rgba(0 0 0 / 60%);
 }
