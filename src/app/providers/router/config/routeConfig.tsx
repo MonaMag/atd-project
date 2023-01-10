@@ -6,9 +6,11 @@ import {
     getRouteLogsHistory,
     getRouteMain,
     getRouteProfile,
+    getRouteUsers,
 } from '../../../../shared/const/router';
 import { AppRoutesProps } from '../../../../shared/types/router';
 import LogsHistoryPage from '../../../../pages/LogsHistoryPage/LogsHistoryPage';
+import { UsersPage } from '../../../../pages/UsersPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
@@ -18,6 +20,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.PROFILE]: {
         path: getRouteProfile(),
         element: <ProfilePage />,
+        authOnly: true,
+    },
+    [AppRoutes.USERS]: {
+        path: getRouteUsers(),
+        element: <UsersPage />,
         authOnly: true,
     },
     [AppRoutes.LOGS_HISTORY]: {

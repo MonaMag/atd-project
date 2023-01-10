@@ -6,10 +6,8 @@ import { Sidebar } from 'widgets/Sidebar';
 function App() {
     return (
         <div className="app">
-            <div className="content-page">
-                <Sidebar />
-                <AppRouter />
-            </div>
+            <Sidebar />
+            <AppRouter />
         </div>
     );
 }
