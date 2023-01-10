@@ -1,6 +1,32 @@
 :root {
     --font-family-main: 'Tele2 TextSans Web SHORT';
     --font-family-secondary: 'Tele2 Display Serif';
+
+    --primary-bg-color: #ffffff;
+    --secondary-bg-color: #1f2229;
+    --base-bg-color: #edf0f2;
+    --select-bg-color: #65707b;
+    --primary-color: #000000;
+    --secondary-color: #ffffff;
+    --third-color: #65707b;
+
+    /*input */
+    --input-border-color: #d3d9df;
+    --activ-border-color: #3fcbff;
+    --error-border-color: #d81b3b;
+    --input-text-color: #65707b;
+    --input-text-error-color: #d81b3b;
+
+    /*btn */
+    --hovered-btn-bg: #65707b;
+    --primary-accent-btn-bg: #3fcbff;
+    --secondary-accent-btn-bg: #38ffa6;
+    --third-accent-btn-bg: #d81b3b;
+    --accent-btn-color: #d81b3b;
+
+    /*card*/
+    --card-bg: #d81b3b;
+
 /*xs*/
     --font-size-xs: 14px;
     --font-line-xs: 18px;
@@ -28,10 +54,8 @@
 
 /*Размеры*/
     --sidebar-widght: 278px;
-    --btn-height-xs: 40px;
-    --btn-height-s: 60px;
 /*Индекс*/
-    --modal-z-index: 1000;
+    --modal-z-index: 100;
     --overlay-z-index: 10;
 
 /*Цвета*/
