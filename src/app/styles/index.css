@@ -1,11 +1,17 @@
 @import "reset.css";
-@import "variables/global.css";
+@import "global.css";
 
+@font-face {
+    font-family: "Tele2DisplaySerif";
+    src: url("../../shared/assets/fonts/tele2_displayserif-regular.woff") format("woff");
+    font-style: normal;
+    font-weight: 400;
+}
 
-.app {
+.app,
+.app_modal {
     font-size: var(--font-s);
     color: var(--primary-color);
-    background: var(--secondary-bg-color);
 }
 
 .app {

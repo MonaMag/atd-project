@@ -34,7 +34,6 @@ export const Modal = (props: ModalProps) => {
         }
     }, [onClose]);
 
-    // Новые ссылки!!!
     const onKeyDown = useCallback(
         (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
@@ -52,7 +51,6 @@ export const Modal = (props: ModalProps) => {
         if (isOpen) {
             window.addEventListener('keydown', onKeyDown);
         }
-
         return () => {
             clearTimeout(timerRef.current);
             window.removeEventListener('keydown', onKeyDown);

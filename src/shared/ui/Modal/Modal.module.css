@@ -10,10 +10,6 @@
     color: var(--primary-color);
 }
 
-.Modal.dark {
-    --bg-color: #090949;
-    --primary-color: #04ff04;
-}
 
 .overlay {
     width: 100%;
@@ -25,13 +21,13 @@
 }
 
 .content {
-    padding: 20px;
+    padding: 30px;
     background: var(--primary-bg-color);
-    transition: 0.3s transform;
     transform: scale(0.5);
+    transition: 0.3s transform;
     max-width: 60%;
-    width: 557px;
-    height: 752px;
+    width: 570px;
+    height: 790px;
 }
 
 .opened {
@@ -41,8 +37,10 @@
 }
 
 .opened .content {
-    transform: scale(1);
+    transform: scale(1) rotate(0deg);
 }
 .isClosing .content {
-    transform: scale(0.2);
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+    transition: all 0.5s;
 }

@@ -17,6 +17,7 @@
     background: none;
     outline: none;
     color: var(--primary-color);
+    text-decoration: underline;
 }
 .clearInverted {
     padding: 0;
