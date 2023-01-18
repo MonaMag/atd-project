@@ -1,0 +1,70 @@
+.UserForm {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.header {
+    font: var(--font-l);
+    font-style: normal;
+    font-weight: 700;
+    text-align: center
+}
+
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 40px 0;
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.input {
+    background-color: var(--primary-bg-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    color: var(--input-text-color);
+    margin-top: 10px;
+    padding: 19px 16px;
+    width: 360px;
+}
+
+.input:focus {
+    border: 1px solid var(--primary-accent-btn-bg);
+    box-shadow: 0 0 0 4px rgba(63, 203, 255, 0.2);
+}
+
+.inputLabel {
+}
+
+.error {
+    border: 1px solid var(--error-border-color);
+    box-shadow: 0 0 0 4px rgba(255, 157, 174, 0.25);
+}
+
+.warning {
+    color: var(--input-text-error-color);
+    margin-left: 10px;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.buttonWrapper{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.userBtn {
+    display: block;
+}

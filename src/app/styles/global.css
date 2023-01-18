@@ -60,5 +60,5 @@
     --overlay-z-index: 10;
 
 /*Цвета*/
-    --overlay-color: rgba(0 0 0 / 60%);
+    --overlay-color: rgba(57, 57, 57, 0.6);
 }

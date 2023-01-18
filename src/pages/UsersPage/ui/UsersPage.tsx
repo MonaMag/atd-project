@@ -14,7 +14,7 @@ const UsersPage = () => {
     const onCloseModal = useCallback(() => {
         setIsCreateModal(false);
     }, []);
-
+    console.log('SPage');
     return (
         <div className={classNames(cls.UsersPage, {}, [])}>
             <div className={cls.btnWrapper}>

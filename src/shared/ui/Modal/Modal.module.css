@@ -27,7 +27,7 @@
     transition: 0.3s transform;
     max-width: 60%;
     width: 570px;
-    height: 790px;
+    min-height: 760px;
 }
 
 .opened {
