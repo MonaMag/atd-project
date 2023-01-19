@@ -1,8 +1,8 @@
 import { classNames } from '../../../../shared/classNames/classNames';
-import AddUserForm from '../AddUserForm/AddUserForm';
 import { Modal } from '../../../../shared/ui/Modal/Modal';
+import AddUserForm from '../AddUserForm/AddUserForm';
 
-interface LoginModalProps {
+interface UserModalProps {
     className?: string;
     isOpen: boolean;
     onClose: () => void;
@@ -12,7 +12,7 @@ export const AddUserModal = ({
     className,
     isOpen,
     onClose,
-}: LoginModalProps) => (
+}: UserModalProps) => (
     <Modal
         className={classNames('', {}, [className])}
         isOpen={isOpen}

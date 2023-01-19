@@ -2,15 +2,15 @@ import { memo, useEffect } from 'react';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
 import cls from './AddUserForm.module.css';
 import { classNames } from '../../../../shared/classNames/classNames';
-import { useAppDispatch } from '../../../../shared/hooks/useAppDispatch';
 import { useFormik } from 'formik';
+import { UserRole } from '../../../../entities/User';
 
 export interface UserFormProps {
     className?: string;
     onClose: () => void;
 }
 
-type FormikErrorType = {
+export type FormikErrorType = {
     username?: string;
     group?: string;
     email?: string;
@@ -19,10 +19,7 @@ type FormikErrorType = {
     company?: string;
     inn?: string;
 };
-
 const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
-    const dispatch = useAppDispatch();
-
     const onCancel = () => {
         onClose();
     };
@@ -87,19 +84,10 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
         },
     });
 
-    /*   function validateUsername(value: any) {
-        let error;
-        if (!value) {
-            error = 'Введите фамилию, имя и отчество';
-        } else if (!/^[а-яА-ЯёЁ\s-]+$/i.test(value)) {
-            error = 'Введите корректные фамилию, имя и отчество';
-        }
-        return error;
-    }*/
     useEffect(() => {
         if (
-            formik.values.group === 'admin' ||
-            formik.values.group === 'presale'
+            formik.values.group === UserRole.ADMIN ||
+            formik.values.group === UserRole.PRESALE
         ) {
             formik.values.company = 'Tele2';
             formik.values.inn = '1234567891';
@@ -125,7 +113,8 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                                 id="username"
                                 type="text"
                                 className={
-                                    formik.errors.phone
+                                    formik.touched.username &&
+                                    formik.errors.username
                                         ? `${cls.error} ${cls.input}`
                                         : cls.input
                                 }
@@ -150,7 +139,7 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                                 id="group"
                                 required
                                 className={
-                                    formik.errors.phone
+                                    formik.touched.group && formik.errors.group
                                         ? `${cls.error} ${cls.input}`
                                         : cls.input
                                 }
@@ -179,7 +168,7 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                                 id="phone"
                                 type="text"
                                 className={
-                                    formik.errors.phone
+                                    formik.touched.phone && formik.errors.phone
                                         ? `${cls.error} ${cls.input}`
                                         : cls.input
                                 }
@@ -204,7 +193,7 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                                 id="email"
                                 type="text"
                                 className={
-                                    formik.errors.email
+                                    formik.touched.email && formik.errors.email
                                         ? `${cls.error} ${cls.input}`
                                         : cls.input
                                 }
@@ -227,6 +216,7 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                             <select
                                 id="status"
                                 className={
+                                    formik.touched.status &&
                                     formik.errors.status
                                         ? `${cls.error} ${cls.input}`
                                         : cls.input
@@ -254,8 +244,12 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                             <input
                                 id="company"
                                 type="text"
-                                disabled={formik.values.group === 'admin'}
+                                disabled={
+                                    formik.values.group === 'admin' ||
+                                    formik.values.group === 'presale'
+                                }
                                 className={
+                                    formik.touched.company &&
                                     formik.errors.company
                                         ? `${cls.error} ${cls.input}`
                                         : cls.input
@@ -280,9 +274,13 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                                 id="inn"
                                 type="text"
                                 className={
-                                    formik.errors.inn
+                                    formik.touched.inn && formik.errors.inn
                                         ? `${cls.error} ${cls.input}`
                                         : cls.input
+                                }
+                                disabled={
+                                    formik.values.group === 'admin' ||
+                                    formik.values.group === 'presale'
                                 }
                                 placeholder={'Введите ИНН компании'}
                                 {...formik.getFieldProps('inn')}
