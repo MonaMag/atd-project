@@ -5,12 +5,17 @@
 }
 
 .header {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    justify-items: center;
+    align-items: center;
     font: var(--font-l);
     font-style: normal;
     font-weight: 700;
     text-align: center;
 }
-
+.closeIcon {
+}
 .inputWrapper {
     display: flex;
     flex-direction: column;

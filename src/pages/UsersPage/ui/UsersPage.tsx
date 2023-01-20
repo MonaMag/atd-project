@@ -1,32 +1,16 @@
-import React, { useCallback, useState } from 'react';
-import { Button, ButtonTheme } from '../../../shared/ui/Button/Button';
-import { AddUserModal } from '../../../feature/addUserModal/ui/AddUserModal/AddUserModal';
+import React from 'react';
 import { classNames } from '../../../shared/classNames/classNames';
 import cls from './UsersPage.module.css';
+import { AddUserModal } from '../../../feature/addUserModal/ui/AddUserModal/AddUserModal';
+import { Button, ButtonTheme } from '../../../shared/ui/Button/Button';
 
 const UsersPage = () => {
-    const [isCreateModal, setIsCreateModal] = useState(false);
-
-    const onShowModal = useCallback(() => {
-        setIsCreateModal(true);
-    }, []);
-
-    const onCloseModal = useCallback(() => {
-        setIsCreateModal(false);
-    }, []);
     console.log('SPage');
     return (
         <div className={classNames(cls.UsersPage, {}, [])}>
             <div className={cls.btnWrapper}>
-                <Button theme={ButtonTheme.BACKGROUND} onClick={onShowModal}>
-                    Создать
-                </Button>
-                <AddUserModal isOpen={isCreateModal} onClose={onCloseModal} />
-                <Button
-                    theme={ButtonTheme.CLEAR}
-                    onClick={onShowModal}
-                    className={cls.btnFilter}
-                >
+                <AddUserModal />
+                <Button theme={ButtonTheme.CLEAR} className={cls.btnFilter}>
                     Применить фильтры
                 </Button>
             </div>

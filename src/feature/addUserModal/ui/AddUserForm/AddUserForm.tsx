@@ -1,9 +1,10 @@
 import { memo, useEffect } from 'react';
 import { Button, ButtonSize, ButtonTheme } from 'shared/ui/Button/Button';
-import cls from './AddUserForm.module.css';
 import { classNames } from '../../../../shared/classNames/classNames';
 import { useFormik } from 'formik';
 import { UserRole } from '../../../../entities/User';
+import { CloseOutlined } from '@ant-design/icons';
+import cls from './AddUserForm.module.css';
 
 export interface UserFormProps {
     className?: string;
@@ -101,7 +102,10 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
 
     return (
         <div className={classNames(cls.UserForm, {}, [className])}>
-            <div className={cls.header}>Данные пользователя</div>
+            <div className={cls.header}>
+                <p>Данные пользователя</p>
+                <CloseOutlined className={cls.closeIcon} onClick={onCancel} />
+            </div>
             <form noValidate onSubmit={formik.handleSubmit}>
                 <div className={cls.inputWrapper}>
                     <div className={cls.item}>
