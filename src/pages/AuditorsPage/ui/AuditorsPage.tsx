@@ -1,8 +1,9 @@
 import React from 'react';
 import cls from './AuditorsPage.module.css';
+import { Page } from '../../../widgets/Page/Page';
 
 const AuditorsPage = () => {
-    return <div className={cls.segments}>SEGMENTS PAGE</div>;
+    return <Page className={cls.segments}>SEGMENTS PAGE</Page>;
 };
 
 export default AuditorsPage;

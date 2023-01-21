@@ -3,18 +3,19 @@ import { classNames } from '../../../shared/classNames/classNames';
 import cls from './UsersPage.module.css';
 import { AddUserModal } from '../../../feature/addUserModal/ui/AddUserModal/AddUserModal';
 import { Button, ButtonTheme } from '../../../shared/ui/Button/Button';
+import { Page } from '../../../widgets/Page/Page';
 
 const UsersPage = () => {
     console.log('SPage');
     return (
-        <div className={classNames(cls.UsersPage, {}, [])}>
-            <div className={cls.btnWrapper}>
+        <Page className={classNames(cls.UsersPage, {}, [])}>
+            <div className={cls.wrapper}>
                 <AddUserModal />
                 <Button theme={ButtonTheme.CLEAR} className={cls.btnFilter}>
                     Применить фильтры
                 </Button>
             </div>
-        </div>
+        </Page>
     );
 };
 

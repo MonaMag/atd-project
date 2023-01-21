@@ -1,7 +1,8 @@
 import React from 'react';
+import { Page } from '../../../widgets/Page/Page';
 
 const ProfilePage = () => {
-    return <div>PROFILE PAGE</div>;
+    return <Page>PROFILE PAGE</Page>;
 };
 
 export default ProfilePage;

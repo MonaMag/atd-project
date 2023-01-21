@@ -9,7 +9,7 @@ import {
     getRouteUsers,
 } from '../../../../shared/const/router';
 import { AppRoutesProps } from '../../../../shared/types/router';
-import LogsHistoryPage from '../../../../pages/LogsHistoryPage/LogsHistoryPage';
+import HistoryPage from '../../../../pages/HistoryPage/HistoryPage';
 import { UsersPage } from '../../../../pages/UsersPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
@@ -29,7 +29,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     },
     [AppRoutes.LOGS_HISTORY]: {
         path: getRouteLogsHistory(),
-        element: <LogsHistoryPage />,
+        element: <HistoryPage />,
         authOnly: true,
     },
     // last

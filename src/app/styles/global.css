@@ -1,7 +1,7 @@
 :root {
     --font-family-main: 'tele2_textSans';
     --font-family-secondary: 'tele2displaySerif';
-    --font-family-link: 'VTele2DisplaySerif';
+    --font-family-link: 'Tele2DisplaySerif';
 
     --primary-bg-color: #ffffff;
     --secondary-bg-color: #1f2229;
@@ -54,7 +54,7 @@
     --font-xxl: var(--font-size-xxl) / var(--font-line-xxl) var(--font-family-main);
 
 /*Размеры*/
-    --sidebar-widght: 278px;
+    --sidebar-widght: 280px;
 /*Индекс*/
     --modal-z-index: 100;
     --overlay-z-index: 10;

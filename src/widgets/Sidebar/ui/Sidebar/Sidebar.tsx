@@ -15,7 +15,7 @@ interface SidebarProps {
 
 export const Sidebar = ({ className }: SidebarProps) => {
     return (
-        <div className={classNames(cls.Sidebar, {}, [className])}>
+        <aside className={classNames(cls.Sidebar, {}, [className])}>
             <div className={cls.links}>
                 <div>
                     <img src={logo} alt="logo" className={cls.logo} />
@@ -63,6 +63,6 @@ export const Sidebar = ({ className }: SidebarProps) => {
                     <span>Профиль</span>
                 </AppLink>
             </div>
-        </div>
+        </aside>
     );
 };
