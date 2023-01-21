@@ -1,4 +1,4 @@
-import SegmentsPage from '../../../../pages/SegmentsPage/ui/SegmentsPage';
+import AuditorsPage from '../../../../pages/AuditorsPage/ui/AuditorsPage';
 import { ProfilePage } from '../../../../pages/ProfilePage';
 import { NotFoundPage } from '../../../../pages/NotFoundPage/NotFoundPage';
 import {
@@ -15,7 +15,7 @@ import { UsersPage } from '../../../../pages/UsersPage';
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
         path: getRouteMain(),
-        element: <SegmentsPage />,
+        element: <AuditorsPage />,
     },
     [AppRoutes.PROFILE]: {
         path: getRouteProfile(),

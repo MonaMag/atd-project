@@ -1,5 +1,8 @@
 .AppLink {
     color: var(--secondary-color);
+    padding: 13px;
+    display: flex;
+    align-items: center;
 }
 
 .AppLink:hover {

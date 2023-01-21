@@ -1,13 +1,14 @@
 import React from 'react';
 import { classNames } from '../../../../shared/classNames/classNames';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
-import {
-    Button,
-    ButtonSize,
-    ButtonTheme,
-} from '../../../../shared/ui/Button/Button';
-import cls from './Sidebar.module.css';
+import { Button, ButtonTheme } from '../../../../shared/ui/Button/Button';
 import logo from '../../../../shared/assets/logo/Logo.png';
+import { ReactComponent as ProfileIcon } from '../../../../shared/assets/icons/profile.svg';
+import { ReactComponent as UserIcon } from '../../../../shared/assets/icons/sheets.svg';
+import { ReactComponent as AuditorsIcon } from '../../../../shared/assets/icons/settings_segment.svg';
+import { ReactComponent as MagazineIcon } from '../../../../shared/assets/icons/magazine.svg';
+import cls from './Sidebar.module.css';
+
 interface SidebarProps {
     className?: string;
 }
@@ -19,23 +20,35 @@ export const Sidebar = ({ className }: SidebarProps) => {
                 <div>
                     <img src={logo} alt="logo" className={cls.logo} />
                 </div>
-                <AppLink to={'/profile'} className={cls.link}>
-                    Профиль
-                </AppLink>
                 <AppLink to={'/users'} className={cls.link}>
-                    Пользователи
+                    <UserIcon className={cls.sidebarIcon} />
+                    <span>Пользователи</span>
                 </AppLink>
                 <AppLink to={'/'} className={cls.link}>
-                    Аудиторные Сегменты
+                    <AuditorsIcon className={cls.sidebarIcon} />
+                    Аудитории
                 </AppLink>
                 <AppLink to={'/history'} className={cls.link}>
+                    <MagazineIcon className={cls.sidebarIcon} />
                     История действий
                 </AppLink>
             </div>
             <div className={cls.volume}>
                 <span className={cls.digit}>44 756 256</span>
-                <Button theme={ButtonTheme.BACKGROUND_BLUE}>
+                <Button
+                    theme={ButtonTheme.CLEAR_INVERTED}
+                    className={cls.clearFilter}
+                >
+                    Описание сегмента
+                </Button>
+                <Button
+                    theme={ButtonTheme.BACKGROUND_BLUE}
+                    className={cls.blueBtn}
+                >
                     Оценить объем
+                </Button>
+                <Button theme={ButtonTheme.OUTLINE_INVERTED}>
+                    Делегировать
                 </Button>
                 <Button
                     theme={ButtonTheme.CLEAR_INVERTED}
@@ -44,10 +57,11 @@ export const Sidebar = ({ className }: SidebarProps) => {
                     Сбросить фильтры
                 </Button>
             </div>
-            <div className={cls.logout}>
-                <Button theme={ButtonTheme.CLEAR_RED} size={ButtonSize.S}>
-                    {'Выйти из аккаунта'}
-                </Button>
+            <div className={cls.footer}>
+                <AppLink to={'/profile'} className={cls.link}>
+                    <ProfileIcon className={cls.sidebarIcon} />
+                    <span>Профиль</span>
+                </AppLink>
             </div>
         </div>
     );
