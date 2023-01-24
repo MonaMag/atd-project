@@ -3,7 +3,7 @@ import { ProfilePage } from '../../../../pages/ProfilePage';
 import { NotFoundPage } from '../../../../pages/NotFoundPage/NotFoundPage';
 import {
     AppRoutes,
-    getRouteLogsHistory,
+    getRouteHistory,
     getRouteMain,
     getRouteProfile,
     getRouteUsers,
@@ -28,7 +28,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         authOnly: true,
     },
     [AppRoutes.LOGS_HISTORY]: {
-        path: getRouteLogsHistory(),
+        path: getRouteHistory(),
         element: <HistoryPage />,
         authOnly: true,
     },

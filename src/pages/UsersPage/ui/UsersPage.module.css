@@ -1,4 +1,4 @@
-.UsersPage {
+.usersPage {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -6,7 +6,6 @@
 }
 
 .wrapper {
-    border: 1px solid;
     padding: 20px;
 }
 

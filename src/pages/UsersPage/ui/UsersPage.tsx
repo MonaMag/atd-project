@@ -8,7 +8,7 @@ import { Page } from '../../../widgets/Page/Page';
 const UsersPage = () => {
     console.log('SPage');
     return (
-        <Page className={classNames(cls.UsersPage, {}, [])}>
+        <Page className={classNames(cls.usersPage, {}, [])}>
             <div className={cls.wrapper}>
                 <AddUserModal />
                 <Button theme={ButtonTheme.CLEAR} className={cls.btnFilter}>

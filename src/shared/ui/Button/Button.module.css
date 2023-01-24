@@ -1,4 +1,4 @@
-.Button {
+.button {
     cursor: pointer;
     color: var(--secondary-color);
     padding: 6px 30px;
@@ -50,6 +50,12 @@
 .background {
     background: var(--secondary-bg-color);
     color: var(--secondary-color);
+    border: none;
+}
+
+.backgroundInverted {
+    background: var(--primary-bg-color);
+    color: var(--primary-color);
     border: none;
 }
 

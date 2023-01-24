@@ -1,3 +1,25 @@
-.segments {
+.auditorsPage {
+}
 
+.header {
+    font: var(--font-xl);
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    padding: 16px 40px;
+    height: 68px;
+    margin-bottom: 20px;
+}
+
+.collapseContainer {
+    background-color: var(--primary-bg-color);
+    margin-bottom: 24px;
+    border: 1px solid var( --input-border-color);
+    box-shadow: none;
+    border-bottom: none;
+}
+
+.collapsePanel {
+    border-bottom: none;
 }

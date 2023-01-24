@@ -1,5 +1,6 @@
 @import "reset.css";
 @import "global.css";
+@import 'antd/dist/reset.css';
 
 @font-face {
     font-family: "Tele2DisplaySerif";

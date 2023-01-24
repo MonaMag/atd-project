@@ -11,7 +11,7 @@ export const Page = memo((props: PageProps) => {
     const { className, children } = props;
 
     return (
-        <main className={classNames(cls.Page, {}, [className])}>
+        <main className={classNames(cls.page, {}, [className])}>
             <div className={cls.pageContent}>{children}</div>
         </main>
     );
