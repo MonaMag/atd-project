@@ -1,0 +1,21 @@
+.Wrapper {
+    display: flex;
+}
+
+.label {
+    margin-right: 5px;
+}
+
+.select {
+    background-color: var(--primary-bg-color);
+    border-radius: 8px;
+    outline: none;
+    color: var(--input-text-color);
+    padding: 2px 10px 2px 2px;
+    border: 1px solid var(--input-border-color);
+    width: 100%;
+}
+
+.option {
+    background-color: var(--primary-bg-color) !important;
+}
