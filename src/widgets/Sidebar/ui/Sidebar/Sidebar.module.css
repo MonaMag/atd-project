@@ -1,36 +1,28 @@
 .Sidebar {
-    height: 100vh;
-    width: var(--sidebar-widght);
+    height: 100%;
+    min-width: var(--sidebar-widght);
     background: var(--secondary-bg-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 40px 10px 16px;
-    position: fixed;
+    padding: 50px 10px 40px;
     top:0;
     bottom:0;
     left:0;
     z-index: 1;
+    position: sticky;
 }
 
 .links {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 3px;
-}
-
-.item {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    height: 48px;
-    width: 90%;
+    margin: 0 0 20px 3px;
 }
 
 .link {
     border-radius: 8px;
-    width: 98%;
+    width: 100%;
     height: 100%;
 }
 
@@ -55,7 +47,7 @@
     color: white;
     font: var(--font-xxl);
     font-family: var(--font-family-secondary);
-    margin-bottom: 10px;
+    margin: 10px 0;
 }
 
 .items {

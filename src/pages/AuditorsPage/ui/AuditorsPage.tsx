@@ -24,7 +24,7 @@ const AuditorsPage = ({ className }: AuditorPageProps) => {
     return (
         <Page className={classNames(cls.auditorsPage, {}, [className])}>
             <div className={cls.header}>Аудитория</div>
-            <div>
+            <div className={cls.auditorsContent}>
                 {categories.map((category, index) => (
                     <>
                         <Collapse

@@ -15,7 +15,8 @@
 }
 
 .app {
-    min-height: 100vh;
     display: flex;
+    align-items: stretch;
+    justify-content: stretch;
 }
 
