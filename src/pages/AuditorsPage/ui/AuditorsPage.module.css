@@ -23,3 +23,21 @@
 .collapsePanel {
     border-bottom: none;
 }
+
+.panelContent {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+
+}
+
+.category {
+    width: 530px;
+    border: 1px solid red;
+}
+
+.choice {
+    width: 530px;
+    border: 1px solid green;
+}

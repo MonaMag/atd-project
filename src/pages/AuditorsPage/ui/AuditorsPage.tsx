@@ -3,33 +3,11 @@ import cls from './AuditorsPage.module.css';
 import { Page } from '../../../widgets/Page/Page';
 import { Collapse } from 'antd';
 import { classNames } from '../../../shared/classNames/classNames';
+import { categories } from '../../../entities/Category/data/data';
 
 interface AuditorPageProps {
     className?: string;
 }
-
-const categories = [
-    {
-        name: 'Пол',
-        border: '2px dashed blue',
-        children: ['жен', 'муж'],
-    },
-    {
-        name: 'Возраст',
-        border: '1px solid red',
-        children: ['18', '28'],
-    },
-    {
-        name: 'География',
-        border: '1px solid red',
-        children: ['Москва', 'Питер'],
-    },
-    {
-        name: 'Соц сети',
-        border: '1px solid red',
-        children: ['Вконтакте', 'Одноклассники', 'Facebook'],
-    },
-];
 
 const AuditorsPage = ({ className }: AuditorPageProps) => {
     // const { token } = theme.useToken();
@@ -47,24 +25,25 @@ const AuditorsPage = ({ className }: AuditorPageProps) => {
         <Page className={classNames(cls.auditorsPage, {}, [className])}>
             <div className={cls.header}>Аудитория</div>
             <div>
-                {categories.map((category, i) => (
+                {categories.map((category, index) => (
                     <>
                         <Collapse
                             className={cls.collapseContainer}
-                            expandIconPosition="start"
+                            expandIconPosition="end"
                         >
                             <Collapse.Panel
-                                key={i.toString()}
+                                key={index.toString()}
                                 header={
                                     <div className={cls.collapseHeader}>
-                                        {category.name + ':'}
+                                        {category.title + ':'}
                                     </div>
                                 }
                                 className={cls.collapsePanel}
                             >
-                                {category.children.map((option) => (
-                                    <p key={option}>{option}</p>
-                                ))}
+                                <div className={cls.panelContent}>
+                                    <div className={cls.category}>tree</div>
+                                    <div className={cls.choice}>choice</div>
+                                </div>
                             </Collapse.Panel>
                         </Collapse>
                     </>

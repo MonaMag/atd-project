@@ -52,6 +52,11 @@
     box-shadow: 0 0 0 4px rgba(63, 203, 255, 0.2);
 }
 
+.select:focus {
+    border: 1px solid var(--primary-accent-btn-bg);
+    box-shadow: 0 0 0 4px rgba(63, 203, 255, 0.2);
+}
+
 .inputLabel {
 }
 

@@ -4,7 +4,7 @@ import { classNames } from '../../../../shared/classNames/classNames';
 import { useFormik } from 'formik';
 import { UserRole } from '../../../../entities/User';
 import { CloseOutlined } from '@ant-design/icons';
-import { ConfigProvider, Select } from 'antd';
+import { ConfigProvider, Select, theme } from 'antd';
 import cls from './AddUserForm.module.css';
 
 const { Option } = Select;
@@ -24,9 +24,12 @@ export type FormikErrorType = {
     inn?: string;
 };
 const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
+    const { token } = theme.useToken();
     const onCancel = () => {
         onClose();
     };
+
+    console.log(token);
 
     const formik = useFormik({
         initialValues: {
@@ -104,6 +107,7 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
     }, [formik.errors]);
 
     console.log('FORMIC', formik);
+
     return (
         <div className={classNames(cls.UserForm, {}, [className])}>
             <div className={cls.header}>
@@ -115,6 +119,8 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                     theme={{
                         token: {
                             controlHeightLG: 60,
+                            colorBorder: '#3fcbff',
+                            colorBorderSecondary: '#3fcbff',
                         },
                     }}
                 >
