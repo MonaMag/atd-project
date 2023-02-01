@@ -1,12 +1,7 @@
-export interface Description {
-    key: string;
-    title: string;
-}
-
 export interface Subcategory {
     key: string;
     title: string;
-    children?: Description[];
+    children?: Subcategory[];
 }
 
 export interface CategorySchema {

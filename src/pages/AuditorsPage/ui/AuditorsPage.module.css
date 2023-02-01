@@ -13,33 +13,7 @@
 }
 
 .auditorsContent {
+
 }
 
-.collapseContainer {
-    background-color: var(--primary-bg-color);
-    border: 1px solid var( --input-border-color);
-    margin-bottom: 24px;
-    box-shadow: none;
-    border-bottom: none;
-}
 
-.collapsePanel {
-    border-bottom: none;
-}
-
-.panelContent {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 24px;
-}
-
-.category {
-    width: 100%;
-    border: 1px solid red;
-}
-
-.choice {
-    width: 100%;
-    border: 1px solid green;
-}
