@@ -1,13 +1,15 @@
 import { ButtonHTMLAttributes, memo, ReactNode } from 'react';
-import cls from './Button.module.css';
 import { classNames, Mods } from '../../classNames/classNames';
+import cls from './Button.module.css';
 
 export enum ButtonTheme {
     CLEAR = 'clear',
     CLEAR_INVERTED = 'clearInverted',
     CLEAR_RED = 'clearRed',
     OUTLINE = 'outline',
+    OUTLINE_INVERTED = 'outlineInverted',
     BACKGROUND = 'background',
+    BACKGROUND_INVERTED = 'backgroundInverted',
     BACKGROUND_HOVERED = 'backgroundHovered',
     BACKGROUND_RED = 'backgroundRed',
     BACKGROUND_BLUE = 'backgroundBlue',
@@ -66,7 +68,7 @@ export const Button = memo((props: ButtonProps) => {
     return (
         <button
             type="button"
-            className={classNames(cls.Button, mods, [className])}
+            className={classNames(cls.button, mods, [className])}
             disabled={disabled}
             {...otherProps}
         >

@@ -1,0 +1,47 @@
+.collapseContainer {
+    background-color: var(--primary-bg-color);
+    border: 1px solid var( --input-border-color);
+    margin-bottom: 20px;
+    box-shadow: none;
+    border-bottom: none;
+
+}
+
+.collapsePanel {
+    display: flex;
+    flex-direction: column;
+}
+
+.panelContent {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 24px;
+    height: 100%;
+}
+
+.searchWrapper {
+    margin-bottom: 16px;
+}
+
+.search {
+
+}
+
+.content {
+    width: 100%;
+    border: 1px solid var(--input-border-color);
+    padding: 12px;
+}
+
+.category {
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 200px;
+}
+
+.choice {
+    width: 100%;
+    border: 1px solid green;
+}
+

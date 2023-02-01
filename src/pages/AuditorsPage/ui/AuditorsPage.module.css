@@ -1,0 +1,19 @@
+.auditorsPage {
+}
+
+.header {
+    font: var(--font-xl);
+    font-family: var(--font-family-secondary);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    padding: 16px 40px;
+    height: 68px;
+    margin-bottom: 20px;
+}
+
+.auditorsContent {
+
+}
+
+

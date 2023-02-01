@@ -1,21 +1,12 @@
-.UsersPage {
-    background-color: var(--primary-bg-color);
-    margin: 80px 12px 200px 12px;
-    width: 98%;
-    height: 100vh;
+.usersPage {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
 }
-.btnWrapper {
-    height: 100px;
-    width: 100%;
-    padding: 0 40px;
-    border: 1px solid #e1e4e5;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+.wrapper {
+    padding: 20px;
 }
 
 .btnFilter {

@@ -1,4 +1,4 @@
-.Button {
+.button {
     cursor: pointer;
     color: var(--secondary-color);
     padding: 6px 30px;
@@ -26,6 +26,7 @@
     outline: none;
     color: var(--secondary-color);
 }
+
 .clearRed {
     padding: 0;
     border: none;
@@ -33,15 +34,28 @@
     outline: none;
     color: var(--accent-btn-color);
 }
+
 .outline {
     border: 1px solid var(--primary-color);
     color: var(--primary-color);
     background: none;
 }
 
+.outlineInverted {
+    border: 1px solid var(--secondary-color);
+    color: var(--secondary-color);
+    background: none;
+}
+
 .background {
     background: var(--secondary-bg-color);
     color: var(--secondary-color);
+    border: none;
+}
+
+.backgroundInverted {
+    background: var(--primary-bg-color);
+    color: var(--primary-color);
     border: none;
 }
 

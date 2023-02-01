@@ -1,8 +1,11 @@
-.AppLink {
+.appLink {
     color: var(--secondary-color);
+    padding: 13px;
+    display: flex;
+    align-items: center;
 }
 
-.AppLink:hover {
+.appLink:hover {
     opacity: 0.8;
 }
 

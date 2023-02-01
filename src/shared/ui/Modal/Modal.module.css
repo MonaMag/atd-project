@@ -1,4 +1,4 @@
-.Modal {
+.modal {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -8,13 +8,13 @@
     pointer-events: none;
     z-index: -1;
     color: var(--primary-color);
+    overflow: auto;
 }
-
 
 .overlay {
     width: 100%;
-    height: 100%;
-    background: var(--overlay-color);
+    min-height: 100%;
+    background: rgba(10, 10, 10, 0.30);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,6 +40,7 @@
 .opened .content {
     transform: scale(1) rotate(0deg);
 }
+
 .isClosing .content {
     transform: scale(0) rotate(0deg);
     opacity: 0;

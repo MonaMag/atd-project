@@ -38,7 +38,21 @@
     width: 360px;
 }
 
+.select {
+    background-color: var(--primary-bg-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    margin-top: 10px;
+    color: var(--input-text-color);
+    width: 360px;
+}
+
 .input:focus {
+    border: 1px solid var(--primary-accent-btn-bg);
+    box-shadow: 0 0 0 4px rgba(63, 203, 255, 0.2);
+}
+
+.select:focus {
     border: 1px solid var(--primary-accent-btn-bg);
     box-shadow: 0 0 0 4px rgba(63, 203, 255, 0.2);
 }

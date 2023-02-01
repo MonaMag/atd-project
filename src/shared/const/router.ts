@@ -1,5 +1,5 @@
 export enum AppRoutes {
-    MAIN = 'auditor_segments',
+    MAIN = 'auditors',
     PROFILE = 'profile',
     USERS = 'users',
     LOGS_HISTORY = 'history',
@@ -10,4 +10,4 @@ export enum AppRoutes {
 export const getRouteMain = () => '/';
 export const getRouteProfile = () => '/profile';
 export const getRouteUsers = () => '/users';
-export const getRouteLogsHistory = () => '/history';
+export const getRouteHistory = () => '/history';

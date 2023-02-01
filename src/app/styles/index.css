@@ -15,15 +15,8 @@
 }
 
 .app {
-    background: var(--base-bg-color);
-    min-height: 100vh;
-}
-
-.wrapper {
-
-}
-
-.content {
     display: flex;
-    margin-left: 278px;
- }
+    align-items: stretch;
+    justify-content: stretch;
+}
+

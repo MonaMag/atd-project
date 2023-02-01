@@ -4,7 +4,7 @@ import { classNames } from '../../classNames/classNames';
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
     className?: string;
-    Svg: React.VFC<React.SVGProps<SVGSVGElement>>;
+    Svg: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 export const Icon = memo((props: IconProps) => {

@@ -1,21 +1,21 @@
-import SegmentsPage from '../../../../pages/SegmentsPage/ui/SegmentsPage';
+import AuditorsPage from '../../../../pages/AuditorsPage/ui/AuditorsPage';
 import { ProfilePage } from '../../../../pages/ProfilePage';
 import { NotFoundPage } from '../../../../pages/NotFoundPage/NotFoundPage';
 import {
     AppRoutes,
-    getRouteLogsHistory,
+    getRouteHistory,
     getRouteMain,
     getRouteProfile,
     getRouteUsers,
 } from '../../../../shared/const/router';
 import { AppRoutesProps } from '../../../../shared/types/router';
-import LogsHistoryPage from '../../../../pages/LogsHistoryPage/LogsHistoryPage';
+import HistoryPage from '../../../../pages/HistoryPage/HistoryPage';
 import { UsersPage } from '../../../../pages/UsersPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
         path: getRouteMain(),
-        element: <SegmentsPage />,
+        element: <AuditorsPage />,
     },
     [AppRoutes.PROFILE]: {
         path: getRouteProfile(),
@@ -28,8 +28,8 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         authOnly: true,
     },
     [AppRoutes.LOGS_HISTORY]: {
-        path: getRouteLogsHistory(),
-        element: <LogsHistoryPage />,
+        path: getRouteHistory(),
+        element: <HistoryPage />,
         authOnly: true,
     },
     // last

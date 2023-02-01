@@ -1,7 +1,6 @@
 :root {
-    --font-family-main: 'tele2_textSans';
-    --font-family-secondary: 'tele2displaySerif';
-    --font-family-link: 'VTele2DisplaySerif';
+    --font-family-main: 'Tele2 TextSans Web SHORT';
+    --font-family-secondary: 'Tele2displaySerif';
 
     --primary-bg-color: #ffffff;
     --secondary-bg-color: #1f2229;
@@ -13,7 +12,7 @@
 
     /*input */
     --input-border-color: #d3d9df;
-    --activ-border-color: #3fcbff;
+    --active-border-color: #3fcbff;
     --error-border-color: #d81b3b;
     --input-text-color: #65707b;
     --input-text-error-color: #d81b3b;
@@ -54,7 +53,7 @@
     --font-xxl: var(--font-size-xxl) / var(--font-line-xxl) var(--font-family-main);
 
 /*Размеры*/
-    --sidebar-widght: 278px;
+    --sidebar-widght: 280px;
 /*Индекс*/
     --modal-z-index: 100;
     --overlay-z-index: 10;
