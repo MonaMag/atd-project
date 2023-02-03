@@ -1,6 +1,6 @@
 import { Subcategory } from '../../entities/Category/model/types/categories';
 
-export const getFilteredTreeData: any = (
+export const getFilteredTreeData = (
     dataSource: Subcategory[],
     searchValue: string,
 ) => {
@@ -12,18 +12,17 @@ export const getFilteredTreeData: any = (
     }
 
     const result = dataSource
-        .map((i) => {
-            if (i.title.toLowerCase().includes(searchValue)) return i;
-            const filtredChildren = getFilteredTreeData(
-                i.children || [],
+        .map((item) => {
+            if (item.title.toLowerCase().includes(searchValue)) return item;
+            const filteredChildren = getFilteredTreeData(
+                item.children || [],
                 searchValue,
             );
-            if (filtredChildren?.length)
-                return { ...i, children: filtredChildren };
-            return;
+            if (filteredChildren && filteredChildren.length)
+                return { ...item, children: filteredChildren };
+            return undefined;
         })
-        .filter(Boolean);
+        .filter(Boolean) as Subcategory[];
 
-    console.log(result);
     return result;
 };
