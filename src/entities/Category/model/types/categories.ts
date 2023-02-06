@@ -5,7 +5,8 @@ export interface Subcategory {
 }
 
 export interface CategorySchema {
-    key: string;
+    id: number;
+    code: string;
     title: string;
-    children: Subcategory[];
+    items: Subcategory[];
 }

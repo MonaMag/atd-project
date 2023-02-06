@@ -13,7 +13,7 @@ const categories = getData();
 
 const firstExpandedKeys = categories
     .map((category) => {
-        return category.children.map((item) => item.key);
+        return category.items.map((item) => item.key);
     })
     .flat();
 
