@@ -15,7 +15,9 @@ export interface UserFormProps {
 }
 
 export type FormikErrorType = {
-    username?: string;
+    firstname?: string;
+    lastname?: string;
+    patronymic?: string;
     group?: string;
     email?: string;
     phone?: string;
@@ -33,7 +35,9 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
 
     const formik = useFormik({
         initialValues: {
-            username: '',
+            firstname: '',
+            lastname: '',
+            patronymic: '',
             group: '',
             email: '',
             phone: '',
@@ -43,10 +47,22 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
         },
         validate: (values) => {
             const errors: FormikErrorType = {};
-            if (!values.username) {
-                errors.username = 'Введите фамилию, имя и отчество';
-            } else if (!/^[а-яА-ЯёЁ\s-]+$/i.test(values.username)) {
-                errors.username = 'Введите корректные фамилию, имя и отчество';
+            if (!values.firstname) {
+                errors.firstname = 'Введите имя';
+            } else if (!/^[а-яА-ЯёЁ\s-]+$/i.test(values.firstname)) {
+                errors.firstname = 'Введите корректное имя';
+            }
+
+            if (!values.lastname) {
+                errors.lastname = 'Введите фамилию';
+            } else if (!/^[а-яА-ЯёЁ\s-]+$/i.test(values.lastname)) {
+                errors.lastname = 'Введите корректную фамилию';
+            }
+
+            if (!values.patronymic) {
+                errors.patronymic = 'Введите отчество';
+            } else if (!/^[а-яА-ЯёЁ\s-]+$/i.test(values.patronymic)) {
+                errors.patronymic = 'Введите корректное отчество';
             }
 
             if (!values.group) {
@@ -127,30 +143,85 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                     <div className={cls.inputWrapper}>
                         <div className={cls.item}>
                             <label
-                                htmlFor="username"
+                                htmlFor="lastname"
                                 className={cls.inputLabel}
                             >
-                                ФИО
+                                Фамилия
                             </label>
                             <div className={cls.field}>
                                 <input
-                                    id="username"
+                                    id="lastname"
                                     type="text"
                                     className={
-                                        formik.touched.username &&
-                                        formik.errors.username
+                                        formik.touched.lastname &&
+                                        formik.errors.lastname
                                             ? `${cls.error} ${cls.input}`
                                             : cls.input
                                     }
-                                    placeholder={
-                                        'Введите фамилию, имя и отчество'
-                                    }
-                                    {...formik.getFieldProps('username')}
+                                    placeholder={'Введите фамилию'}
+                                    {...formik.getFieldProps('lastname')}
                                 />
-                                {formik.touched.username &&
-                                formik.errors.username ? (
+                                {formik.touched.lastname &&
+                                formik.errors.lastname ? (
                                     <div className={cls.warning}>
-                                        {formik.errors.username}
+                                        {formik.errors.lastname}
+                                    </div>
+                                ) : null}
+                            </div>
+                        </div>
+                        <div className={cls.item}>
+                            <label
+                                htmlFor="firstname"
+                                className={cls.inputLabel}
+                            >
+                                Имя
+                            </label>
+                            <div className={cls.field}>
+                                <input
+                                    id="firstname"
+                                    type="text"
+                                    className={
+                                        formik.touched.firstname &&
+                                        formik.errors.firstname
+                                            ? `${cls.error} ${cls.input}`
+                                            : cls.input
+                                    }
+                                    placeholder={'Введите имя'}
+                                    {...formik.getFieldProps('firstname')}
+                                />
+                                {formik.touched.firstname &&
+                                formik.errors.firstname ? (
+                                    <div className={cls.warning}>
+                                        {formik.errors.firstname}
+                                    </div>
+                                ) : null}
+                            </div>
+                        </div>
+
+                        <div className={cls.item}>
+                            <label
+                                htmlFor="patronymic"
+                                className={cls.inputLabel}
+                            >
+                                Отчество
+                            </label>
+                            <div className={cls.field}>
+                                <input
+                                    id="patronymic"
+                                    type="text"
+                                    className={
+                                        formik.touched.patronymic &&
+                                        formik.errors.patronymic
+                                            ? `${cls.error} ${cls.input}`
+                                            : cls.input
+                                    }
+                                    placeholder={'Введите отчество'}
+                                    {...formik.getFieldProps('patronymic')}
+                                />
+                                {formik.touched.patronymic &&
+                                formik.errors.patronymic ? (
+                                    <div className={cls.warning}>
+                                        {formik.errors.patronymic}
                                     </div>
                                 ) : null}
                             </div>
@@ -181,7 +252,7 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                                     <Option value="">Выберите группу</Option>
                                     <Option value="admin">Администратор</Option>
                                     <Option value="presale">Пресейл</Option>
-                                    <Option value="user">Пользовватель</Option>
+                                    <Option value="user">Пользователь</Option>
                                 </Select>
                                 {formik.touched.group && formik.errors.group ? (
                                     <div className={cls.warning}>

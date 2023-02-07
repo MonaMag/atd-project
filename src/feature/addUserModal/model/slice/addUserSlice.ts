@@ -4,7 +4,9 @@ import { UserRole } from '../../../../entities/User';
 
 const initialState: ProfileSchema = {
     data: {
-        username: 'mona',
+        firstname: '',
+        lastname: '',
+        patronymic: '',
         group: UserRole.USER,
         phone: '',
         email: '',
@@ -20,8 +22,8 @@ export const addUserSlice = createSlice({
     name: 'addUserForm',
     initialState,
     reducers: {
-        setUsername: (state, action: PayloadAction<string>) => {
-            state.data.username = action.payload;
+        setFirstname: (state, action: PayloadAction<string>) => {
+            state.data.firstname = action.payload;
         },
         setEmail: (state, action: PayloadAction<string>) => {
             state.data.email = action.payload;

@@ -19,7 +19,7 @@
 .inputWrapper {
     display: flex;
     flex-direction: column;
-    margin: 30px 0 40px;
+    margin: 10px 0 30px;
 }
 
 .field{
@@ -34,7 +34,7 @@
     border-radius: 8px;
     color: var(--input-text-color);
     margin-top: 10px;
-    padding: 19px 16px;
+    padding: 15px 16px;
     width: 360px;
 }
 
