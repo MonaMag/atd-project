@@ -1,9 +1,16 @@
-export function getData() {
+import { CategorySchema } from '../types/categories';
+
+export function getData(): CategorySchema[] {
     return [
         {
             id: 1,
             code: 'gender',
             title: 'Пол',
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: false,
+            },
             items: [
                 { key: '001', title: 'жен' },
                 { key: '002', title: 'муж' },
@@ -13,6 +20,11 @@ export function getData() {
             id: 2,
             code: 'age',
             title: 'Возраст',
+            displayType: 'slider',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: false,
+            },
             items: [
                 { key: '003', title: '18-24 года' },
                 { key: '004', title: '25-34 года' },
@@ -25,6 +37,11 @@ export function getData() {
             id: 3,
             code: 'geo',
             title: 'География',
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: true,
+                enableSearch: true,
+            },
             items: [
                 { key: '008', title: 'Москва' },
                 { key: '009', title: 'Московская область' },
@@ -36,6 +53,11 @@ export function getData() {
             id: 4,
             code: 'child',
             title: 'Дети',
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: true,
+            },
             items: [
                 { key: '012', title: 'Дошкольники' },
                 { key: '013', title: 'Старшеклассники' },
@@ -47,6 +69,11 @@ export function getData() {
             id: 5,
             code: 'income',
             title: 'Доход',
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: true,
+            },
             items: [
                 { key: '017', title: 'Ниже среднего' },
                 { key: '018', title: 'Средний' },
@@ -59,6 +86,11 @@ export function getData() {
             id: 6,
             code: 'device',
             title: 'Устройство',
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: true,
+            },
             items: [
                 {
                     key: '022',
@@ -97,6 +129,11 @@ export function getData() {
             id: 7,
             code: 'inter',
             title: 'Интересы',
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: true,
+                enableSearch: true,
+            },
             items: [
                 {
                     key: '029',

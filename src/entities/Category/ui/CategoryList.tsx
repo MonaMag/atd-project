@@ -25,69 +25,69 @@ const CategoryList: React.FC<CategoryListProps> = ({
 }) => {
     const [expandedKeys, setExpandedKeys] =
         useState<React.Key[]>(firstExpandedKeys);
-    const [checkedKeys, setCheckedKeys] = useState<React.Key[]>([]);
     const [autoExpandParent, setAutoExpandParent] = useState<boolean>(true);
     const [searchValue, setSearchValue] = useState<string>('');
-    const [includesKey, setIncludesKey] = useState<Key[]>([]);
-    const [excludesKey, setExcludesKey] = useState<Key[]>([]);
+    const [value, setValue] = React.useState('include');
+    const [includeCheckedKey, setIncludeCheckedKey] = useState<Key[]>([]);
+    const [excludeCheckedKey, setExcludeCheckedKey] = useState<Key[]>([]);
 
     const onExpand = (expandedKeys: React.Key[]) => {
         setExpandedKeys(expandedKeys);
         setAutoExpandParent((prev) => !prev);
     };
 
-    const onCheck = (checkedKeys: any) => {
-        setCheckedKeys(checkedKeys);
-        console.log('CHECKED', checkedKeys);
-    };
-
     const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
+    };
+    const onChangeTab = (e: RadioChangeEvent) => {
+        setValue(e.target.value);
+    };
+
+    const onCheckInclude = (checkedKeys: any) => {
+        setIncludeCheckedKey(checkedKeys);
+    };
+
+    const onCheckExclude = (checkedKeys: any) => {
+        setExcludeCheckedKey(checkedKeys);
     };
 
     const filteredData =
         category.items && getFilteredTreeData(category.items, searchValue);
 
-    const onChangedInclude = () => {
-        setExcludesKey(checkedKeys);
-    };
-
-    const onChangeExclude = () => {
-        setIncludesKey(checkedKeys);
-    };
-
-    const [value, setValue] = React.useState('include');
-    const onChangeTab = (e: RadioChangeEvent) => {
-        setValue(e.target.value);
-    };
-
     function renderContent(tab: string) {
         switch (tab) {
             case 'include':
-                return (
+                return category.displayType === 'tree' ? (
                     <Tree
                         checkable
                         onExpand={onExpand}
                         expandedKeys={expandedKeys}
                         autoExpandParent={autoExpandParent}
-                        onCheck={onCheck}
-                        checkedKeys={checkedKeys}
+                        onCheck={onCheckInclude}
+                        checkedKeys={includeCheckedKey}
                         switcherIcon={<DownOutlined />}
-                        treeData={prepareTreeData(filteredData!, excludesKey)}
+                        treeData={prepareTreeData(
+                            filteredData!,
+                            excludeCheckedKey,
+                        )}
                     />
+                ) : (
+                    <div>Slider</div>
                 );
             case 'exclude':
                 return (
                     <Tree
-                        style={{ color: 'red' }}
                         checkable
                         onExpand={onExpand}
                         expandedKeys={expandedKeys}
                         autoExpandParent={autoExpandParent}
-                        onCheck={onCheck}
-                        checkedKeys={checkedKeys}
+                        onCheck={onCheckExclude}
+                        checkedKeys={excludeCheckedKey}
                         switcherIcon={<DownOutlined />}
-                        treeData={prepareTreeData(filteredData!, includesKey)}
+                        treeData={prepareTreeData(
+                            filteredData!,
+                            includeCheckedKey,
+                        )}
                     />
                 );
         }
@@ -117,43 +117,62 @@ const CategoryList: React.FC<CategoryListProps> = ({
                     >
                         <div className={cls.panelContent}>
                             <div className={cls.contentWrapper}>
-                                <Radio.Group
-                                    defaultValue="include"
-                                    value={value}
-                                    className={cls.tabGroup}
-                                    buttonStyle={'solid'}
-                                    onChange={onChangeTab}
-                                >
-                                    <Radio.Button
-                                        value="include"
-                                        className={cls.tabButton}
-                                        onClick={onChangedInclude}
+                                {category.displayParams.enableExclude ? (
+                                    <Radio.Group
+                                        defaultValue="include"
+                                        value={value}
+                                        className={cls.tabGroup}
+                                        buttonStyle={'solid'}
+                                        onChange={onChangeTab}
                                     >
-                                        Включить
-                                    </Radio.Button>
-                                    <Radio.Button
-                                        value="exclude"
-                                        className={cls.tabButton}
-                                        onClick={onChangeExclude}
-                                    >
-                                        Исключить
-                                    </Radio.Button>
-                                    <div className={cls.content}>
-                                        <div className={cls.searchWrapper}>
-                                            <Input
-                                                allowClear
-                                                className={cls.search}
-                                                placeholder="Search"
-                                                prefix={<SearchOutlined />}
-                                                value={searchValue}
-                                                onChange={onChangeSearch}
-                                            />
+                                        <Radio.Button
+                                            value="include"
+                                            className={cls.tabButton}
+                                        >
+                                            Включить
+                                        </Radio.Button>
+                                        <Radio.Button
+                                            value="exclude"
+                                            className={cls.tabButton}
+                                        >
+                                            Исключить
+                                        </Radio.Button>
+                                        <div className={cls.content}>
+                                            <div className={cls.searchWrapper}>
+                                                <Input
+                                                    allowClear
+                                                    className={cls.search}
+                                                    placeholder="Search"
+                                                    prefix={<SearchOutlined />}
+                                                    value={searchValue}
+                                                    onChange={onChangeSearch}
+                                                />
+                                            </div>
+                                            <div className={cls.category}>
+                                                {renderContent(value)}
+                                            </div>
                                         </div>
+                                    </Radio.Group>
+                                ) : (
+                                    <div className={cls.content}>
+                                        {category.displayParams
+                                            .enableSearch && (
+                                            <div className={cls.searchWrapper}>
+                                                <Input
+                                                    allowClear
+                                                    className={cls.search}
+                                                    placeholder="Search"
+                                                    prefix={<SearchOutlined />}
+                                                    value={searchValue}
+                                                    onChange={onChangeSearch}
+                                                />
+                                            </div>
+                                        )}
                                         <div className={cls.category}>
-                                            {renderContent(value)}
+                                            {renderContent('include')}
                                         </div>
                                     </div>
-                                </Radio.Group>
+                                )}
                             </div>
                             <div className={cls.choice}>choice</div>
                         </div>
