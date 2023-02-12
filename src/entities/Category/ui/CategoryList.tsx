@@ -77,9 +77,14 @@ const CategoryList: React.FC<CategoryListProps> = ({
         console.log('Clicked! But prevent default.');
     };
 
-    const handleRemove = (key: Key): void => {
+    const handleRemoveInclude = (key: Key): void => {
         setIncludeCheckedKey(includeCheckedKey.filter((p) => p !== key));
     };
+
+    const handleRemoveExclude = (key: Key): void => {
+        setExcludeCheckedKey(excludeCheckedKey.filter((p) => p !== key));
+    };
+
     const filteredData =
         category.items && getFilteredTreeData(category.items, searchValue);
 
@@ -252,7 +257,27 @@ const CategoryList: React.FC<CategoryListProps> = ({
                                                         closable
                                                         color={'#3fcbff'}
                                                         onClose={(): void =>
-                                                            handleRemove(key)
+                                                            handleRemoveInclude(
+                                                                key,
+                                                            )
+                                                        }
+                                                        className={cls.choice}
+                                                    >
+                                                        Tag {key}
+                                                    </Tag>
+                                                );
+                                            })}
+                                        {excludeCheckedKey.length > 0 &&
+                                            excludeCheckedKey.map((key) => {
+                                                return (
+                                                    <Tag
+                                                        key={key}
+                                                        closable
+                                                        color={'#d81b3b'}
+                                                        onClose={(): void =>
+                                                            handleRemoveExclude(
+                                                                key,
+                                                            )
                                                         }
                                                         className={cls.choice}
                                                     >
