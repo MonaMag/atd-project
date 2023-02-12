@@ -3,7 +3,9 @@ import { UserRole } from '../../../User';
 export type profileStatus = 'active' | 'inactive';
 
 export interface Profile {
-    username: string;
+    firstname: string;
+    lastname: string;
+    patronymic: string;
     group: UserRole;
     phone: string;
     email: string;

@@ -11,6 +11,7 @@
     --third-color: #65707b;
 
     /*input */
+    --base-border-color: #edf0f2;
     --input-border-color: #d3d9df;
     --active-border-color: #3fcbff;
     --error-border-color: #d81b3b;

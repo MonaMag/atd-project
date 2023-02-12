@@ -42,7 +42,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
                     Описание сегмента
                 </Button>
                 <Button
-                    theme={ButtonTheme.BACKGROUND_BLUE}
+                    theme={ButtonTheme.BACKGROUND_INVERTED}
                     className={cls.blueBtn}
                 >
                     Оценить объем

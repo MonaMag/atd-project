@@ -8,6 +8,6 @@ export enum AppRoutes {
 }
 
 export const getRouteMain = () => '/';
-export const getRouteProfile = () => '/profile';
+export const getRouteProfile = (id: string) => `/profile/${id}`;
 export const getRouteUsers = () => '/users';
 export const getRouteHistory = () => '/history';

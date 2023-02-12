@@ -1,194 +1,182 @@
-export function getData() {
+import { CategorySchema } from '../types/categories';
+
+export function getData(): CategorySchema[] {
     return [
         {
-            key: '0',
+            id: 1,
+            code: 'gender',
             title: 'Пол',
-            children: [
-                {
-                    key: '00',
-                    title: 'Выбрать все',
-                    children: [
-                        { key: '01', title: 'жен' },
-                        { key: '02', title: 'муж' },
-                    ],
-                },
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: false,
+            },
+            items: [
+                { key: '001', title: 'жен' },
+                { key: '002', title: 'муж' },
             ],
         },
         {
-            key: '1',
+            id: 2,
+            code: 'age',
             title: 'Возраст',
-            children: [
-                {
-                    key: '001',
-                    title: 'Выбрать все',
-                    children: [
-                        { key: '10', title: '18-24 года' },
-                        { key: '11', title: '25-34 года' },
-                        { key: '12', title: '35-44 года' },
-                        { key: '13', title: '45-54 года' },
-                        { key: '14', title: '55 и старше' },
-                    ],
-                },
+            displayType: 'slider',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: false,
+            },
+            items: [
+                { key: '003', title: '18-24 года' },
+                { key: '004', title: '25-34 года' },
+                { key: '005', title: '35-44 года' },
+                { key: '006', title: '45-54 года' },
+                { key: '007', title: '55 и старше' },
             ],
         },
         {
-            key: '2',
+            id: 3,
+            code: 'geo',
             title: 'География',
-            children: [
-                {
-                    key: '002',
-                    title: 'Выбрать все',
-                    children: [
-                        { key: '20', title: 'Москва' },
-                        { key: '21', title: 'Московская область' },
-                        { key: '22', title: 'Санкт-Петербург' },
-                        { key: '23', title: 'Ленинградская область' },
-                    ],
-                },
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: true,
+                enableSearch: true,
+            },
+            items: [
+                { key: '008', title: 'Москва' },
+                { key: '009', title: 'Московская область' },
+                { key: '010', title: 'Санкт-Петербург' },
+                { key: '011', title: 'Ленинградская область' },
             ],
         },
         {
-            key: '3',
-            title: 'Гражданство',
-            children: [
-                {
-                    key: '003',
-                    title: 'Выбрать все',
-                    children: [
-                        { key: '30', title: 'Гражданин РФ' },
-                        { key: '31', title: 'Не гражданин РФ' },
-                    ],
-                },
-            ],
-        },
-        {
-            key: '4',
+            id: 4,
+            code: 'child',
             title: 'Дети',
-            children: [
-                {
-                    key: '004',
-                    title: 'Выбрать все',
-                    children: [
-                        { key: '40', title: 'Дошкольники' },
-                        { key: '41', title: 'Старшеклассники' },
-                        { key: '42', title: 'Школьники' },
-                        { key: '43', title: 'Нет детей' },
-                    ],
-                },
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: true,
+            },
+            items: [
+                { key: '012', title: 'Дошкольники' },
+                { key: '013', title: 'Старшеклассники' },
+                { key: '014', title: 'Школьники' },
+                { key: '015', title: 'Нет детей' },
             ],
         },
         {
-            key: '5',
+            id: 5,
+            code: 'income',
             title: 'Доход',
-            children: [
-                {
-                    key: '005',
-                    title: 'Выбрать все',
-                    children: [
-                        { key: '50', title: 'Ниже среднего' },
-                        { key: '51', title: 'Средний' },
-                        { key: '52', title: 'Выше среднего' },
-                        { key: '53', title: 'Высокий' },
-                        { key: '54', title: 'Премиум' },
-                    ],
-                },
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: true,
+            },
+            items: [
+                { key: '017', title: 'Ниже среднего' },
+                { key: '018', title: 'Средний' },
+                { key: '019', title: 'Выше среднего' },
+                { key: '020', title: 'Высокий' },
+                { key: '021', title: 'Премиум' },
             ],
         },
         {
-            key: '6',
+            id: 6,
+            code: 'device',
             title: 'Устройство',
-            children: [
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: false,
+                enableSearch: true,
+            },
+            items: [
                 {
-                    key: '006',
-                    title: 'Выбрать все',
+                    key: '022',
+                    title: 'Мобильное устройство',
                     children: [
-                        {
-                            key: '61',
-                            title: 'Мобильное устройство',
-                            children: [
-                                { key: '610', title: 'Смартфон' },
-                                { key: '611', title: 'Планшет' },
-                                { key: '612', title: 'Телефон' },
-                                { key: '613', title: 'КПК' },
-                                { key: '614', title: 'Нетбук' },
-                            ],
-                        },
-                        {
-                            key: '62',
-                            title: 'Операционная система',
-                            children: [
-                                { key: '620', title: 'MacOs' },
-                                { key: '621', title: 'Linux' },
-                                { key: '622', title: 'Windows' },
-                                { key: '623', title: 'Android' },
-                            ],
-                        },
-                        {
-                            key: '63',
-                            title: 'Производитель устройства',
-                            children: [
-                                { key: '630', title: 'Пункт 1' },
-                                { key: '631', title: 'Пункт 2' },
-                                { key: '632', title: 'Пункт 3' },
-                                { key: '633', title: 'Пункт 3' },
-                            ],
-                        },
+                        { key: '610', title: 'Смартфон' },
+                        { key: '611', title: 'Планшет' },
+                        { key: '612', title: 'Телефон' },
+                        { key: '613', title: 'КПК' },
+                        { key: '614', title: 'Нетбук' },
+                    ],
+                },
+                {
+                    key: '023',
+                    title: 'Операционная система',
+                    children: [
+                        { key: '620', title: 'MacOs' },
+                        { key: '621', title: 'Linux' },
+                        { key: '622', title: 'Windows' },
+                        { key: '623', title: 'Android' },
+                    ],
+                },
+                {
+                    key: '024',
+                    title: 'Производитель устройства',
+                    children: [
+                        { key: '025', title: 'Пункт 1' },
+                        { key: '026', title: 'Пункт 2' },
+                        { key: '027', title: 'Пункт 3' },
+                        { key: '028', title: 'Пункт 3' },
                     ],
                 },
             ],
         },
         {
-            key: '7',
+            id: 7,
+            code: 'inter',
             title: 'Интересы',
-            children: [
+            displayType: 'tree',
+            displayParams: {
+                enableExclude: true,
+                enableSearch: true,
+            },
+            items: [
                 {
-                    key: '007',
-                    title: 'Выбрать все',
+                    key: '029',
+                    title: 'B2B',
                     children: [
                         {
-                            key: '70',
-                            title: 'B2B',
-                            children: [
-                                {
-                                    key: '701',
-                                    title: 'Реклама и маркетинг',
-                                },
-                                {
-                                    key: '702',
-                                    title: 'Юридические и бухгалтерские услуги',
-                                },
-                            ],
+                            key: '030',
+                            title: 'Реклама и маркетинг',
                         },
                         {
-                            key: '71',
-                            title: 'Дети',
-                            children: [
-                                { key: '710', title: 'Товары для детей' },
-                                { key: '711', title: 'Детский контент' },
-                            ],
+                            key: '031',
+                            title: 'Юридические и бухгалтерские услуги',
                         },
+                    ],
+                },
+                {
+                    key: '032',
+                    title: 'Дети',
+                    children: [
+                        { key: '033', title: 'Товары для детей' },
+                        { key: '034', title: 'Детский контент' },
+                    ],
+                },
+                {
+                    key: '035',
+                    title: 'Здоровье',
+                    children: [
+                        { key: '036', title: 'Медицинские услуги' },
+                        { key: '037', title: 'Аптеки и лекарства' },
+                    ],
+                },
+                {
+                    key: '038',
+                    title: 'Красота и уход',
+                    children: [
+                        { key: '039', title: 'Салоны красоты' },
+                        { key: '040', title: 'Косметика и парфюмерия' },
+                        { key: '041', title: 'Мода и стиль' },
                         {
-                            key: '72',
-                            title: 'Здоровье',
-                            children: [
-                                { key: '720', title: 'Медицинские услуги' },
-                                { key: '721', title: 'Аптеки и лекарства' },
-                            ],
+                            key: '042',
+                            title: 'Парикмахерские и барбершопы',
                         },
-                        {
-                            key: '73',
-                            title: 'Красота и уход',
-                            children: [
-                                { key: '730', title: 'Салоны красоты' },
-                                { key: '731', title: 'Косметика и парфюмерия' },
-                                { key: '732', title: 'Мода и стиль' },
-                                {
-                                    key: '733',
-                                    title: 'Парикмахерские и барбершопы',
-                                },
-                                { key: '734', title: 'Парфюмерия' },
-                            ],
-                        },
+                        { key: '043', title: 'Парфюмерия' },
                     ],
                 },
             ],
