@@ -8,6 +8,7 @@ export type DisplayParams = {
 export interface Subcategory {
     key: string;
     title: string;
+    disabled?: boolean;
     children?: Subcategory[];
 }
 

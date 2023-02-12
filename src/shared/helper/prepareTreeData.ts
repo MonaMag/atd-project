@@ -8,7 +8,7 @@ export const prepareTreeData = (data: Subcategory[], checkedKeys: Key[]) => {
 
     const result = data.map((item) => {
         if (checkedKeys.includes(item.key)) {
-            return { ...item, disabled: true };
+            item = { ...item, disabled: true };
         }
 
         const filteredChildren = prepareTreeData(
