@@ -67,7 +67,8 @@
 .choiceWrapper {
     width: 100%;
     border-radius: 8px;
-    max-height: 200px;
+    min-height: 100px;
+    max-height: 350px;
     overflow: hidden;
     overflow-y: auto;
 }
@@ -105,29 +106,3 @@
     border-radius: 6px;
 }
 
-.sliderWrapper {
-    margin: 24px;
-}
-.slider :global(.ant-slider-dot) {
-    height: 0;
-    width: 0;
-    border: none;
-}
-.slider :global(.ant-slider-mark-text) {
-    font-size: 13px;
-    line-height: 18px;
-    color: #8F9399;
-    margin-top: 14px;
-}
-.slider :global(.ant-slider-track) {
-    background-color: #717273;
-}
-.slider :global(.ant-slider-handle-2) {
-    background-color: #1f2229;
-}
-.sliderText {
-    margin-bottom: 20px;
-}
-.sliderTextDash {
-    margin: 0 10px;
-}

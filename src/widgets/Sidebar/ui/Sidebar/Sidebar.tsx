@@ -58,7 +58,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
                 </Button>
             </div>
             <div className={cls.footer}>
-                <AppLink to={'/profile'} className={cls.link}>
+                <AppLink to={'/profile' + 1} className={cls.link}>
                     <ProfileIcon className={cls.sidebarIcon} />
                     <span>Профиль</span>
                 </AppLink>

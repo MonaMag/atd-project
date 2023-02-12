@@ -1,9 +1,9 @@
 import React, { Key, memo, useState } from 'react';
-import cls from './Tree.module.css';
-import { classNames } from '../../classNames/classNames';
+import cls from './TreeComponent.module.css';
+import { classNames } from '../../../../shared/classNames/classNames';
 import { Tree } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
-import { Subcategory } from '../../../entities/Category/model/types/categories';
+import { Subcategory } from '../../model/types/categories';
 
 interface TreeProps {
     className?: string;
@@ -13,7 +13,7 @@ interface TreeProps {
     treeData: Subcategory[];
 }
 
-export const TreeContainer = memo((props: TreeProps) => {
+export const TreeComponent = memo((props: TreeProps) => {
     const { className, firstExpandedKeys, checkedKeys, onCheck, treeData } =
         props;
     const [expandedKeys, setExpandedKeys] =

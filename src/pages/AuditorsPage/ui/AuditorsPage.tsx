@@ -3,7 +3,7 @@ import cls from './AuditorsPage.module.css';
 import { Page } from '../../../widgets/Page/Page';
 import { classNames } from '../../../shared/classNames/classNames';
 import { getData } from '../../../entities/Category/model/data/data';
-import CategoryList from '../../../entities/Category/ui/CategoryList';
+import CategoryList from '../../../entities/Category/ui/CategoryList/CategoryList';
 
 interface AuditorPageProps {
     className?: string;
