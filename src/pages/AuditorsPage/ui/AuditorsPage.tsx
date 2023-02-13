@@ -11,12 +11,6 @@ interface AuditorPageProps {
 
 const categories = getData();
 
-const firstExpandedKeys = categories
-    .map((category) => {
-        return category.items.map((item) => item.key);
-    })
-    .flat();
-
 const AuditorsPage: React.FC<AuditorPageProps> = ({ className }) => {
     useEffect(() => {}, []);
 
@@ -25,13 +19,7 @@ const AuditorsPage: React.FC<AuditorPageProps> = ({ className }) => {
             <div className={cls.header}>Аудитория</div>
             <div className={cls.auditorsContent}>
                 {categories.map((category, index) => {
-                    return (
-                        <CategoryList
-                            key={index}
-                            category={category}
-                            firstExpandedKeys={firstExpandedKeys}
-                        />
-                    );
+                    return <CategoryList key={index} category={category} />;
                 })}
             </div>
         </Page>

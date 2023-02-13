@@ -25,10 +25,6 @@
     background: var(--primary-bg-color);
     transform: scale(0.5);
     transition: 0.3s transform;
-    max-width: 60%;
-    width: 570px;
-    min-height: 750px;
-    max-height: 100vh;
 }
 
 .opened {

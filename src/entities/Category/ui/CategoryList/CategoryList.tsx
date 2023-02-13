@@ -15,21 +15,20 @@ import cls from './CategoryList.module.css';
 import { prepareTreeData } from '../../../../shared/helper/prepareTreeData';
 import { TreeComponent } from '../TreeComponent/TreeComponent';
 import { SliderComponent } from '../SliderComponent/SliderComponent';
+import { AntTreeNodeCheckedEvent } from 'antd/es/tree';
 
 interface CategoryListProps {
     className?: string;
     category: CategorySchema;
-    firstExpandedKeys: string[];
 }
 
-const CategoryList: React.FC<CategoryListProps> = ({
-    category,
-    firstExpandedKeys,
-}) => {
+const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
     const [searchValue, setSearchValue] = useState<string>('');
     const [value, setValue] = React.useState('include');
     const [includeCheckedKey, setIncludeCheckedKey] = useState<Key[]>([]);
     const [excludeCheckedKey, setExcludeCheckedKey] = useState<Key[]>([]);
+    const [includeTagsTitle, setIncludeTagsTitle] = useState<string[]>([]);
+    const [excludeTagsTitle, setExcludeTagsTitle] = useState<string[]>([]);
 
     const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
@@ -40,22 +39,40 @@ const CategoryList: React.FC<CategoryListProps> = ({
         console.log('onChangeTab: ', e.target.value);
     };
 
-    const onCheckInclude = (checkedKeys: any) => {
+    const onCheckInclude = (checkedKeys: any, e: AntTreeNodeCheckedEvent) => {
         setIncludeCheckedKey(checkedKeys);
+        const includeTags: string[] = [];
+        if (e.checkedNodes) {
+            e.checkedNodes.forEach((el: any) => {
+                if (el.children) return;
+                includeTags.push(el.title);
+            });
+        }
+        setIncludeTagsTitle(includeTags);
         console.log('includeCheckedKey: ', checkedKeys);
     };
 
-    const onCheckExclude = (checkedKeys: any) => {
+    const onCheckExclude = (checkedKeys: any, e: AntTreeNodeCheckedEvent) => {
         setExcludeCheckedKey(checkedKeys);
+        const excludeTags: string[] = [];
+        if (e.checkedNodes) {
+            e.checkedNodes.forEach((el: any) => {
+                if (el.children) return;
+                excludeTags.push(el.title);
+            });
+        }
+        setExcludeTagsTitle(excludeTags);
         console.log('excludeCheckedKey: ', checkedKeys);
     };
 
-    const handleRemoveInclude = (key: Key): void => {
-        setIncludeCheckedKey(includeCheckedKey.filter((p) => p !== key));
+    const handleRemoveInclude = (title: string): void => {
+        //setIncludeCheckedKey(includeCheckedKey.filter((p) => p !== key));
+        setIncludeTagsTitle(includeTagsTitle.filter((t) => t !== title));
     };
 
-    const handleRemoveExclude = (key: Key): void => {
-        setExcludeCheckedKey(excludeCheckedKey.filter((p) => p !== key));
+    const handleRemoveExclude = (title: string): void => {
+        //setExcludeCheckedKey(excludeCheckedKey.filter((p) => p !== key));
+        setExcludeTagsTitle(excludeTagsTitle.filter((t) => t !== title));
     };
 
     const filteredData =
@@ -66,7 +83,6 @@ const CategoryList: React.FC<CategoryListProps> = ({
             case 'include':
                 return category.displayType === 'tree' ? (
                     <TreeComponent
-                        firstExpandedKeys={firstExpandedKeys}
                         onCheck={onCheckInclude}
                         checkedKeys={includeCheckedKey}
                         treeData={
@@ -93,7 +109,6 @@ const CategoryList: React.FC<CategoryListProps> = ({
             case 'exclude':
                 return (
                     <TreeComponent
-                        firstExpandedKeys={firstExpandedKeys}
                         onCheck={onCheckExclude}
                         checkedKeys={excludeCheckedKey}
                         treeData={prepareTreeData(
@@ -128,7 +143,21 @@ const CategoryList: React.FC<CategoryListProps> = ({
                         key={category.id}
                         header={
                             <div className={cls.collapseHeader}>
-                                {category.title + ':'}
+                                <div className={cls.headerTitle}>
+                                    {category.title + ':'}
+                                </div>
+                                <div className={cls.headerTags}>
+                                    {includeCheckedKey.length > 0 && (
+                                        <div className={cls.headerIncludeTags}>
+                                            {includeTagsTitle}
+                                        </div>
+                                    )}
+                                    {excludeCheckedKey.length > 0 && (
+                                        <div className={cls.headerIncludeTags}>
+                                            {excludeTagsTitle}
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         }
                         className={cls.collapsePanel}
@@ -201,39 +230,39 @@ const CategoryList: React.FC<CategoryListProps> = ({
                             {category.title !== 'Возраст' && (
                                 <div className={cls.choiceWrapper}>
                                     <Space direction={'vertical'} size={6} wrap>
-                                        {includeCheckedKey.length > 0 &&
-                                            includeCheckedKey.map((key) => {
+                                        {includeTagsTitle.length > 0 &&
+                                            includeTagsTitle.map((title) => {
                                                 return (
                                                     <Tag
-                                                        key={key}
+                                                        key={title}
                                                         closable
                                                         color={'#3fcbff'}
                                                         onClose={(): void =>
                                                             handleRemoveInclude(
-                                                                key,
+                                                                title,
                                                             )
                                                         }
                                                         className={cls.choice}
                                                     >
-                                                        Tag {key}
+                                                        {title}
                                                     </Tag>
                                                 );
                                             })}
-                                        {excludeCheckedKey.length > 0 &&
-                                            excludeCheckedKey.map((key) => {
+                                        {excludeTagsTitle.length > 0 &&
+                                            excludeTagsTitle.map((title) => {
                                                 return (
                                                     <Tag
-                                                        key={key}
+                                                        key={title}
                                                         closable
                                                         color={'#d81b3b'}
                                                         onClose={(): void =>
                                                             handleRemoveExclude(
-                                                                key,
+                                                                title,
                                                             )
                                                         }
                                                         className={cls.choice}
                                                     >
-                                                        Tag {key}
+                                                        {title}
                                                     </Tag>
                                                 );
                                             })}

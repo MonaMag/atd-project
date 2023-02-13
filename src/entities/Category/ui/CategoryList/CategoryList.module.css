@@ -13,6 +13,26 @@
     background-color: var(--base-bg-color);
     border-radius: 8px 8px 0 0 !important;
 }
+.headerTitle {
+    width: 80px;
+}
+.collapseHeader {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+}
+.headerTags {
+    margin-left: 20px;
+}
+
+.headerIncludeTags {
+    white-space: nowrap; /* Запрещаем перенос строк */
+    overflow: hidden; /* Обрезаем все, что не помещается в область */
+    text-overflow: ellipsis;
+}
+
 .panelContent {
     display: flex;
     justify-content: center;
