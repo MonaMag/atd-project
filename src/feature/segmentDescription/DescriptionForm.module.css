@@ -1,0 +1,30 @@
+.descriptionForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    width: 600px;
+    min-height: 500px;
+}
+
+.descriptionCopyButton {
+    width: 250px;
+    margin-bottom: 32px;
+}
+
+.descriptionVolume {
+    margin-bottom: 32px;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 28px;
+}
+
+.descriptionContent {
+
+}
+
+.closeIcon {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+}
