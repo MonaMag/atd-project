@@ -2,6 +2,7 @@ import React from 'react';
 import { CloseOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { Button, ButtonTheme } from '../../shared/ui/Button/Button';
 import cls from './DelegationForm.module.css';
+import { AdPlatform } from '../../entities/AdPlatforms/ui/AdPlatformList';
 
 interface DelegationFormProps {
     className?: string;
@@ -35,7 +36,9 @@ export const DelegationForm = ({ className, onClose }: DelegationFormProps) => {
                 </div>
             </div>
 
-            <div className={cls.descriptionList}>Таблица</div>
+            <div className={cls.descriptionList}>
+                <AdPlatform />
+            </div>
         </div>
     );
 };
