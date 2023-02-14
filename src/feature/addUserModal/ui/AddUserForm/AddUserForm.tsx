@@ -424,7 +424,7 @@ const AddUserForm = memo(({ className, onClose }: UserFormProps) => {
                             className={cls.userBtn}
                             onClick={onCancel}
                         >
-                            Отменить
+                            Отмена
                         </Button>
                     </div>
                 </ConfigProvider>

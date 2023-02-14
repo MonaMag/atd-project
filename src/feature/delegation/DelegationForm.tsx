@@ -1,8 +1,9 @@
 import React from 'react';
-import { CloseOutlined, PlusCircleOutlined } from '@ant-design/icons';
+import { CloseOutlined } from '@ant-design/icons';
 import { Button, ButtonTheme } from '../../shared/ui/Button/Button';
 import cls from './DelegationForm.module.css';
-import { AdPlatform } from '../../entities/AdPlatforms/ui/AdPlatformList';
+import { AdPlatformModal } from '../../entities/AdPlatforms/ui/AdPlatformModal';
+import { AdPlatformList } from '../../entities/AdPlatforms/ui/AdPlatformList';
 
 interface DelegationFormProps {
     className?: string;
@@ -17,13 +18,14 @@ export const DelegationForm = ({ className, onClose }: DelegationFormProps) => {
                     <span className={cls.headerText}>
                         Аккаунты рекламных площадок
                     </span>
-                    <Button
+                    {/*   <Button
                         theme={ButtonTheme.BACKGROUND}
                         className={cls.headerButton}
                     >
                         <PlusCircleOutlined className={cls.addIcon} />
                         Добавить
-                    </Button>
+                    </Button>*/}
+                    <AdPlatformModal />
                     <Button
                         theme={ButtonTheme.OUTLINE}
                         className={cls.headerButton}
@@ -37,7 +39,7 @@ export const DelegationForm = ({ className, onClose }: DelegationFormProps) => {
             </div>
 
             <div className={cls.descriptionList}>
-                <AdPlatform />
+                <AdPlatformList />
             </div>
         </div>
     );

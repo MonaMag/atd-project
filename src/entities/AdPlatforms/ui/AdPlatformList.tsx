@@ -8,7 +8,7 @@ interface AdPlatformListProps {
     className?: string;
 }
 
-export const AdPlatform: React.FC<AdPlatformListProps> = ({ className }) => {
+export const AdPlatformList: React.FC<AdPlatformListProps> = (props) => {
     const columns: ColumnsType<AdPlatformScheme> = [
         {
             title: 'Рекламная площадка',
@@ -17,8 +17,8 @@ export const AdPlatform: React.FC<AdPlatformListProps> = ({ className }) => {
         },
         {
             title: 'ID аккаунта',
-            dataIndex: 'id',
-            key: 'id',
+            dataIndex: 'accountId',
+            key: 'accountId',
         },
         {
             title: 'Дата изменения',
@@ -37,6 +37,30 @@ export const AdPlatform: React.FC<AdPlatformListProps> = ({ className }) => {
                     <EditOutlined />
                 </Space>
             ),
+        },
+    ];
+
+    const data = [
+        {
+            key: '1',
+            platform: 'MyTarget',
+            accountId: '123456789',
+            date: '12.02.2023',
+            comment: 'Рабочий ЛК',
+        },
+        {
+            key: '2',
+            platform: 'MyTarget',
+            accountId: '123456789',
+            date: '12.02.2023',
+            comment: 'Рабочий ЛК',
+        },
+        {
+            key: '3',
+            platform: 'MyTarget',
+            accountId: '123456789',
+            date: '12.02.2023',
+            comment: 'Рабочий ЛК',
         },
     ];
     const rowSelection = {
@@ -63,15 +87,7 @@ export const AdPlatform: React.FC<AdPlatformListProps> = ({ className }) => {
                     ...rowSelection,
                 }}
                 pagination={false}
-                dataSource={[
-                    {
-                        key: 'platform',
-                        platform: 'string',
-                        id: 1,
-                        date: 'string',
-                        comment: 'string',
-                    },
-                ]}
+                dataSource={data}
                 columns={columns}
             />
         </>

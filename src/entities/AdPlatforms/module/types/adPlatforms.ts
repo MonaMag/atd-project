@@ -1,7 +1,7 @@
 export interface AdPlatformScheme {
     key: string;
     platform: string;
-    id: number;
+    accountId: string;
     date: string;
-    comment: string;
+    comment?: string;
 }

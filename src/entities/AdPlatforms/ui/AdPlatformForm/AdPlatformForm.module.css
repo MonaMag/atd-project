@@ -1,0 +1,91 @@
+.adPlatformForm {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 589px;
+}
+
+.header {
+    display: grid;
+    grid-template-columns: 1fr 30px;
+    justify-items: center;
+    align-items: center;
+    font: var(--font-l);
+    margin-bottom: 20px;
+}
+
+.headerTitle {
+    font-family: var(--font-family-secondary);
+    font-weight: 400;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.closeIcon {
+
+}
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0 30px;
+}
+
+.field{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 60px;
+}
+
+.input {
+    background-color: var(--primary-bg-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    color: var(--input-text-color);
+    margin-top: 10px;
+    padding: 20px 16px;
+    width: 360px;
+}
+
+.select {
+    background-color: var(--primary-bg-color);
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    margin-top: 10px;
+    color: var(--input-text-color);
+    width: 360px;
+}
+
+.input:focus {
+    border: 1px solid var(--primary-accent-btn-bg);
+    box-shadow: 0 0 0 4px rgba(63, 203, 255, 0.2);
+}
+
+.select:focus {
+    border: 1px solid var(--primary-accent-btn-bg);
+    box-shadow: 0 0 0 4px rgba(63, 203, 255, 0.2);
+}
+
+.inputLabel {
+    width: 145px;
+    font-weight: 600;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.buttonWrapper{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.userBtn {
+    display: block;
+}
