@@ -27,8 +27,12 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
     const [value, setValue] = React.useState('include');
     const [includeCheckedKey, setIncludeCheckedKey] = useState<Key[]>([]);
     const [excludeCheckedKey, setExcludeCheckedKey] = useState<Key[]>([]);
-    const [includeTagsTitle, setIncludeTagsTitle] = useState<any[]>([]);
-    const [excludeTagsTitle, setExcludeTagsTitle] = useState<string[]>([]);
+    const [includeTagsTitle, setIncludeTagsTitle] = useState<
+        { key: string; title: string }[]
+    >([]);
+    const [excludeTagsTitle, setExcludeTagsTitle] = useState<
+        { key: string; title: string }[]
+    >([]);
 
     const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.currentTarget.value);
@@ -66,15 +70,15 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
         console.log('excludeCheckedKey: ', checkedKeys);
     };
 
-    const handleRemoveInclude = (key: string) => {
+    /*   const handleRemoveInclude = (key: string) => {
         setIncludeCheckedKey(includeCheckedKey.filter((p) => p !== key));
         //setIncludeTagsTitle(includeTagsTitle.filter((t) => t !== title));
-    };
-
+    };*/
+    /*
     const handleRemoveExclude = (key: string): void => {
         setExcludeCheckedKey(excludeCheckedKey.filter((p) => p !== key));
         //setExcludeTagsTitle(excludeTagsTitle.filter((t) => t !== title));
-    };
+    };*/
 
     const filteredData =
         category.items && getFilteredTreeData(category.items, searchValue);
@@ -149,14 +153,14 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
                                 </div>
                                 <div className={cls.headerTags}>
                                     {includeCheckedKey.length > 0 && (
-                                        <div className={cls.headerIncludeTags}>
-                                            {includeTagsTitle}
-                                        </div>
+                                        <div
+                                            className={cls.headerIncludeTags}
+                                        ></div>
                                     )}
                                     {excludeCheckedKey.length > 0 && (
-                                        <div className={cls.headerIncludeTags}>
-                                            {excludeTagsTitle}
-                                        </div>
+                                        <div
+                                            className={cls.headerIncludeTags}
+                                        ></div>
                                     )}
                                 </div>
                             </div>
@@ -233,15 +237,30 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
                                     <Space direction={'vertical'} size={6} wrap>
                                         {includeTagsTitle.length > 0 &&
                                             includeTagsTitle.map((i) => {
-                                                const includeClose = () => {
-                                                    handleRemoveInclude(i.key);
-                                                };
+                                                const handleRemoveInclude =
+                                                    () => {
+                                                        setIncludeCheckedKey(
+                                                            includeCheckedKey.filter(
+                                                                (k) =>
+                                                                    k !== i.key,
+                                                            ),
+                                                        );
+                                                        setIncludeTagsTitle(
+                                                            includeTagsTitle.filter(
+                                                                (t) =>
+                                                                    t.key !==
+                                                                    i.key,
+                                                            ),
+                                                        );
+                                                    };
                                                 return (
                                                     <Tag
                                                         key={i.key}
                                                         closable
                                                         color={'#3fcbff'}
-                                                        onClose={includeClose}
+                                                        onClose={
+                                                            handleRemoveInclude
+                                                        }
                                                         className={cls.choice}
                                                     >
                                                         {i.title}
@@ -249,20 +268,34 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
                                                 );
                                             })}
                                         {excludeTagsTitle.length > 0 &&
-                                            excludeTagsTitle.map((title) => {
+                                            excludeTagsTitle.map((i) => {
+                                                const handleRemoveExclude =
+                                                    () => {
+                                                        setExcludeCheckedKey(
+                                                            excludeCheckedKey.filter(
+                                                                (p) =>
+                                                                    p !== i.key,
+                                                            ),
+                                                        );
+                                                        setExcludeTagsTitle(
+                                                            excludeTagsTitle.filter(
+                                                                (t) =>
+                                                                    t.key !==
+                                                                    i.key,
+                                                            ),
+                                                        );
+                                                    };
                                                 return (
                                                     <Tag
-                                                        key={title}
+                                                        key={i.key}
                                                         closable
                                                         color={'#d81b3b'}
-                                                        onClose={(): void =>
-                                                            handleRemoveExclude(
-                                                                title,
-                                                            )
+                                                        onClose={
+                                                            handleRemoveExclude
                                                         }
                                                         className={cls.choice}
                                                     >
-                                                        {title}
+                                                        {i.title}
                                                     </Tag>
                                                 );
                                             })}
