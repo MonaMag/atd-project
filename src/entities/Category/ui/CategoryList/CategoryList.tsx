@@ -9,6 +9,7 @@ import { TreeComponent } from '../TreeComponent/TreeComponent';
 import { SliderComponent } from '../SliderComponent/SliderComponent';
 import { AntTreeNodeCheckedEvent } from 'antd/es/tree';
 import { getFlatItems } from '../../../../shared/helper/getFlatItems';
+import { KEY_CHOOSE_All } from '../../model/consts/categoryConsts';
 
 interface CategoryListProps {
   className?: string;
@@ -22,8 +23,6 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
   const [value, setValue] = React.useState('include');
   const [includeCheckedKey, setIncludeCheckedKey] = useState<Key[]>([]);
   const [excludeCheckedKey, setExcludeCheckedKey] = useState<Key[]>([]);
-  //const [includeTagsTitle, setIncludeTagsTitle] = useState<{ key: string; title: string }[]>([]);
-  //const [excludeTagsTitle, setExcludeTagsTitle] = useState<{ key: string; title: string }[]>([]);
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value);
@@ -36,54 +35,36 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
 
   const onCheckInclude = (checkedKeys: any, e: AntTreeNodeCheckedEvent) => {
     setIncludeCheckedKey(checkedKeys);
-    /*   const includeTags: any[] = [];
-    if (e.checkedNodes) {
-      e.checkedNodes.forEach((el: any) => {
-        if (el.children) return;
-        includeTags.push({ key: el.key, title: el.title });
-      });
-    }*/
-    //setIncludeTagsTitle(includeTags);
     console.log('includeCheckedKey: ', checkedKeys);
   };
   const onCheckExclude = (checkedKeys: any, e: AntTreeNodeCheckedEvent) => {
     setExcludeCheckedKey(checkedKeys);
-    /*const excludeTags: any[] = [];
-    if (e.checkedNodes) {
-      e.checkedNodes.forEach((el: any) => {
-        if (el.children) return;
-        excludeTags.push({ key: el.key, title: el.title });
-      });
-    }*/
-    //setExcludeTagsTitle(excludeTags);
     console.log('excludeCheckedKey: ', checkedKeys);
   };
 
   const handleRemoveInclude = (key: Key) => {
-    let newIncludedKeys = includeCheckedKey.filter((p) => p !== key);
+    let newIncludedKeys = includeCheckedKey.filter((p) => p !== key && p !== KEY_CHOOSE_All);
     for (const item of flatItems.reverse()) {
       if (!item.children || !newIncludedKeys.includes(item.key)) {
-        // Нам нужны только родители, и они должны быть отмечены
         continue;
       }
-      const hasCheckedIncChildren = item.children.some((child) =>
+      const hasCheckedIncChildren = item.children.every((child) =>
         newIncludedKeys.includes(child.key),
       );
       if (!hasCheckedIncChildren) {
-        // Это родитель, он отмечен и ни один из его детей не выбран, исключим и его тоже
         newIncludedKeys = newIncludedKeys.filter((p) => p !== item.key);
       }
     }
-    setExcludeCheckedKey(newIncludedKeys);
+    setIncludeCheckedKey(newIncludedKeys);
   };
 
   const handleRemoveExclude = (key: Key) => {
-    let newExcludedKeys = excludeCheckedKey.filter((p) => p !== key);
+    let newExcludedKeys = excludeCheckedKey.filter((p) => p !== key && p !== KEY_CHOOSE_All);
     for (const item of flatItems.reverse()) {
       if (!item.children || !newExcludedKeys.includes(item.key)) {
         continue;
       }
-      const hasCheckedExcChildren = item.children.some((child) =>
+      const hasCheckedExcChildren = item.children.every((child) =>
         newExcludedKeys.includes(child.key),
       );
       if (!hasCheckedExcChildren) {
@@ -93,19 +74,8 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
     setExcludeCheckedKey(newExcludedKeys);
   };
 
-  /*   const handleRemoveInclude = (key: string) => {
-        setIncludeCheckedKey(includeCheckedKey.filter((p) => p !== key));
-        //setIncludeTagsTitle(includeTagsTitle.filter((t) => t !== title));
-    };*/
-  /*
-    const handleRemoveExclude = (key: string): void => {
-        setExcludeCheckedKey(excludeCheckedKey.filter((p) => p !== key));
-        //setExcludeTagsTitle(excludeTagsTitle.filter((t) => t !== title));
-    };*/
-
   const getItem = (targetKey: Key) => flatItems.filter(({ key }) => key === targetKey)?.[0] || null;
   const getItemTitle = (targetKey: Key) => getItem(targetKey)?.title;
-  // const isItemParent = (targetKey: Key) => getItem(targetKey)?.children!.length > 0;
 
   const isItemParent = (targetKey: Key) => (getItem(targetKey)?.children?.length || 0) > 0;
 
@@ -119,12 +89,12 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
             onCheck={onCheckInclude}
             checkedKeys={includeCheckedKey}
             treeData={
-              category.title === 'Пол'
-                ? prepareTreeData(filteredData!, excludeCheckedKey)
+              category.title === 'Пол' && filteredData
+                ? prepareTreeData(filteredData, excludeCheckedKey)
                 : prepareTreeData(
                     [
                       {
-                        key: '01',
+                        key: KEY_CHOOSE_All,
                         title: 'Выбрать все',
                         children: filteredData,
                       },
@@ -144,7 +114,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
             treeData={prepareTreeData(
               [
                 {
-                  key: '01',
+                  key: KEY_CHOOSE_All,
                   title: 'Выбрать все',
                   children: filteredData,
                 },
@@ -170,9 +140,38 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
             header={
               <div className={cls.collapseHeader}>
                 <div className={cls.headerTitle}>{category.title + ':'}</div>
-                <div className={cls.headerTags}>
-                  {includeCheckedKey.length > 0 && <div className={cls.headerIncludeTags}></div>}
-                  {excludeCheckedKey.length > 0 && <div className={cls.headerIncludeTags}></div>}
+                <div className={cls.headerTagsWrapper}>
+                  <div className={cls.tagsIncludeWrapper}>
+                    {category.displayParams.enableExclude && includeCheckedKey.length > 0 && (
+                      <span>Включить: </span>
+                    )}
+                    {includeCheckedKey.length > 0 &&
+                      includeCheckedKey
+                        .filter((k) => k !== KEY_CHOOSE_All && !isItemParent(k))
+                        .map((key) => {
+                          return (
+                            <span key={key} className={cls.headerIncludeTags}>
+                              {getItemTitle(key)}
+                            </span>
+                          );
+                        })}
+                  </div>
+
+                  <div className={cls.tagsExcludeWrapper}>
+                    {category.displayParams.enableExclude && excludeCheckedKey.length > 0 && (
+                      <span>Исключить: </span>
+                    )}
+                    {excludeCheckedKey.length > 0 &&
+                      excludeCheckedKey
+                        .filter((k) => k !== KEY_CHOOSE_All && !isItemParent(k))
+                        .map((key) => {
+                          return (
+                            <span key={key} className={cls.headerExcludeTags}>
+                              {getItemTitle(key)}
+                            </span>
+                          );
+                        })}
+                  </div>
                 </div>
               </div>
             }
@@ -233,7 +232,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
                   <Space direction={'vertical'} size={6} wrap>
                     {includeCheckedKey.length > 0 &&
                       includeCheckedKey
-                        .filter((k) => !isItemParent(k))
+                        .filter((k) => k !== KEY_CHOOSE_All && !isItemParent(k))
                         .map((key) => {
                           return (
                             <Tag
@@ -249,12 +248,8 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
                         })}
                     {excludeCheckedKey.length > 0 &&
                       excludeCheckedKey
-                        .filter((k) => !isItemParent(k))
+                        .filter((k) => k !== KEY_CHOOSE_All && !isItemParent(k))
                         .map((key) => {
-                          /*const handleRemoveExclude = () => {
-                          setExcludeCheckedKey(excludeCheckedKey.filter((p) => p !== i.key));
-                          setExcludeTagsTitle(excludeTagsTitle.filter((t) => t.key !== i.key));
-                        };*/
                           return (
                             <Tag
                               key={key}
