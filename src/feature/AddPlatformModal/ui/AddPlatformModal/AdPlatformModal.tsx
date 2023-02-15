@@ -1,10 +1,10 @@
 import React, { useCallback, useState } from 'react';
-import { Modal } from '../../../shared/ui/Modal/Modal';
-import { AdPlatformForm } from './AdPlatformForm/AdPlatformForm';
-import { Button, ButtonTheme } from '../../../shared/ui/Button/Button';
-import { classNames } from '../../../shared/classNames/classNames';
-import cls from '../../../feature/delegation/DelegationForm.module.css';
+import { Modal } from '../../../../shared/ui/Modal/Modal';
+import { Button, ButtonTheme } from '../../../../shared/ui/Button/Button';
+import { classNames } from '../../../../shared/classNames/classNames';
+import cls from '../../../delegation/DelegationForm.module.css';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { AdPlatformForm } from '../AdPlatformForm/AdPlatformForm';
 
 interface AdPlatformModalProps {
     className?: string;
@@ -23,9 +23,6 @@ export const AdPlatformModal = ({ className }: AdPlatformModalProps) => {
 
     return (
         <>
-            {/*<Button theme={ButtonTheme.BACKGROUND} onClick={onShowModal}>
-                Добавить
-            </Button>*/}
             <Button
                 theme={ButtonTheme.BACKGROUND}
                 className={cls.headerButton}
