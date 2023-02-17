@@ -5,39 +5,38 @@ import { classNames } from '../../shared/classNames/classNames';
 import { DelegationForm } from './DelegationForm';
 
 interface DelegationModalProps {
-    className?: string;
+  className?: string;
 }
 
 export const DelegationModal = ({ className }: DelegationModalProps) => {
-    const [isCreateModal, setIsCreateModal] = useState(false);
+  const [isCreateModal, setIsCreateModal] = useState(false);
 
-    const onShowModal = useCallback(() => {
-        setIsCreateModal(true);
-    }, []);
+  const onShowModal = useCallback(() => {
+    setIsCreateModal(true);
+  }, []);
 
-    const onCloseModal = useCallback(() => {
-        setIsCreateModal(false);
-    }, []);
+  const onCloseModal = useCallback(() => {
+    setIsCreateModal(false);
+  }, []);
 
-    const handleDelegation = () => {
-        console.log('Delegation');
-        onShowModal();
-    };
-    return (
-        <>
-            <Button
-                theme={ButtonTheme.OUTLINE_INVERTED}
-                onClick={handleDelegation}
-            >
-                Делегировать
-            </Button>
-            <Modal
-                className={classNames('', {}, [className])}
-                isOpen={isCreateModal}
-                onClose={onCloseModal}
-            >
-                <DelegationForm onClose={onCloseModal} />
-            </Modal>
-        </>
-    );
+  const handleDelegation = () => {
+    console.log('Delegation');
+    onShowModal();
+  };
+  return (
+    <>
+      <Button theme={ButtonTheme.OUTLINE_INVERTED} onClick={handleDelegation}>
+        Делегировать
+      </Button>
+      {isCreateModal && (
+        <Modal
+          className={classNames('', {}, [className])}
+          isOpen={isCreateModal}
+          onClose={onCloseModal}
+        >
+          <DelegationForm onClose={onCloseModal} />
+        </Modal>
+      )}
+    </>
+  );
 };

@@ -7,37 +7,35 @@ import { PlusCircleOutlined } from '@ant-design/icons';
 import { AdPlatformForm } from '../AdPlatformForm/AdPlatformForm';
 
 interface AdPlatformModalProps {
-    className?: string;
+  className?: string;
 }
 
 export const AdPlatformModal = ({ className }: AdPlatformModalProps) => {
-    const [isCreateModal, setIsCreateModal] = useState(false);
+  const [isCreateModal, setIsCreateModal] = useState(false);
 
-    const onShowModal = useCallback(() => {
-        setIsCreateModal(true);
-    }, []);
+  const onShowModal = useCallback(() => {
+    setIsCreateModal(true);
+  }, []);
 
-    const onCloseModal = useCallback(() => {
-        setIsCreateModal(false);
-    }, []);
+  const onCloseModal = useCallback(() => {
+    setIsCreateModal(false);
+  }, []);
 
-    return (
-        <>
-            <Button
-                theme={ButtonTheme.BACKGROUND}
-                className={cls.headerButton}
-                onClick={onShowModal}
-            >
-                <PlusCircleOutlined className={cls.addIcon} />
-                Добавить
-            </Button>
-            <Modal
-                className={classNames('', {}, [className])}
-                isOpen={isCreateModal}
-                onClose={onCloseModal}
-            >
-                <AdPlatformForm onClose={onCloseModal} />
-            </Modal>
-        </>
-    );
+  return (
+    <>
+      <Button theme={ButtonTheme.BACKGROUND} className={cls.headerButton} onClick={onShowModal}>
+        <PlusCircleOutlined className={cls.addIcon} />
+        Добавить
+      </Button>
+      {isCreateModal && (
+        <Modal
+          className={classNames('', {}, [className])}
+          isOpen={isCreateModal}
+          onClose={onCloseModal}
+        >
+          <AdPlatformForm onClose={onCloseModal} />
+        </Modal>
+      )}
+    </>
+  );
 };
