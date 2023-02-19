@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button, ButtonTheme } from '../../shared/ui/Button/Button';
 import cls from './DelegationForm.module.css';
-import { AdPlatformModal } from '../AddPlatformModal/ui/AddPlatformModal/AdPlatformModal';
+import { AddPlatformModal } from '../AddPlatformModal/ui/AddPlatformModal/AddPlatformModal';
 import { AdPlatformList } from '../../entities/AdPlatform/ui/AdPlatformList';
+import { AdPlatformScheme } from '../../entities/AdPlatform/model/types/adPlatforms';
 
 interface DelegationFormProps {
   className?: string;
@@ -11,15 +12,31 @@ interface DelegationFormProps {
 }
 
 export const DelegationForm = ({ className, onClose }: DelegationFormProps) => {
+  const [hasSelected, setHasSelected] = useState<boolean>(true);
+  const [selectedRows, setSelectedRows] = useState<AdPlatformScheme[]>([]);
+
+  const handleDisabled = useCallback((isDisabled: boolean) => {
+    setHasSelected(isDisabled);
+  }, []);
+
+  const handleSelectedRows = useCallback((selectedRows: AdPlatformScheme[]) => {
+    setSelectedRows(selectedRows);
+  }, []);
+
   return (
     <div className={cls.delegationForm}>
       <div className={cls.headerWrapper}>
         <div className={cls.headerContent}>
           <span className={cls.headerText}>Аккаунты рекламных площадок</span>
 
-          <AdPlatformModal />
+          <AddPlatformModal />
 
-          <Button theme={ButtonTheme.OUTLINE} className={cls.headerButton}>
+          <Button
+            theme={ButtonTheme.OUTLINE}
+            className={cls.headerButton}
+            disabled={hasSelected}
+            onClick={() => console.log(selectedRows)}
+          >
             Делегировать
           </Button>
         </div>
@@ -29,7 +46,7 @@ export const DelegationForm = ({ className, onClose }: DelegationFormProps) => {
       </div>
 
       <div className={cls.descriptionList}>
-        <AdPlatformList />
+        <AdPlatformList onDisabled={handleDisabled} onSelectedRows={handleSelectedRows} />
       </div>
     </div>
   );

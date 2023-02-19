@@ -24,6 +24,7 @@
 .closeIcon {
 
 }
+
 .inputWrapper {
     display: flex;
     flex-direction: column;
@@ -54,6 +55,7 @@
     margin-top: 10px;
     color: var(--input-text-color);
     width: 360px;
+    font-weight: 600;
 }
 
 .input:focus {

@@ -1,59 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React, { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { AdPlatformScheme } from '../model/types/adPlatforms';
 import { ColumnsType } from 'antd/es/table';
-import { Space, Table } from 'antd';
-import { EditOutlined } from '@ant-design/icons';
-import { classNames } from '../../../shared/classNames/classNames';
-import { Modal } from '../../../shared/ui/Modal/Modal';
-import { UpdatePlatformForm } from '../../../feature/UpdatePlatformModal/UpdatePlatformForm';
+import { Form, Input, Table } from 'antd';
+import { EditOutlined, SaveOutlined } from '@ant-design/icons';
 
 interface AdPlatformListProps {
   className?: string;
+  onDisabled: (isDisabled: boolean) => void;
+  onSelectedRows: (selectedRows: AdPlatformScheme[]) => void;
 }
 
-export const AdPlatformList = ({ className }: AdPlatformListProps) => {
-  const [showUpdateModal, setShowUpdateModal] = useState<boolean>(false);
-  const [currentId, setCurrentId] = useState<string>('');
-
-  const columns: ColumnsType<AdPlatformScheme> = [
-    {
-      title: 'Рекламная площадка',
-      dataIndex: 'platform',
-      key: 'platform',
-    },
-    {
-      title: 'ID аккаунта',
-      dataIndex: 'accountId',
-      key: 'accountId',
-    },
-    {
-      title: 'Дата изменения',
-      dataIndex: 'date',
-      key: 'date',
-    },
-    {
-      title: 'Комментарий',
-      dataIndex: 'comment',
-      key: 'comment',
-    },
-    {
-      key: 'action',
-      render: ({ id, key }: { id: string; key: string }) => (
-        <Space size={'middle'}>
-          <EditOutlined onClick={() => handleOpenUpdateModal(id)} />
-          <Modal
-            className={classNames('', {}, [className])}
-            isOpen={showUpdateModal}
-            onClose={onCloseUpdateModal}
-          >
-            <UpdatePlatformForm onClose={onCloseUpdateModal} />
-          </Modal>
-        </Space>
-      ),
-    },
-  ];
-
-  const data = [
+export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlatformListProps) => {
+  const [form] = Form.useForm();
+  const data: AdPlatformScheme[] = [
     {
       key: '1',
       platform: 'MyTarget',
@@ -76,9 +35,105 @@ export const AdPlatformList = ({ className }: AdPlatformListProps) => {
       comment: 'Рабочий ЛК',
     },
   ];
+
+  const [dataSource, setDataSource] = useState<AdPlatformScheme[]>(data);
+  const [editingKey, setEditingKey] = useState<string>('');
+  const [comment, setComment] = useState<string>('');
+  //const [selectedRows, setSelectedRows] = useState<AdPlatformScheme[]>([]);
+
+  const isEditing = (record: AdPlatformScheme) => record.key === editingKey;
+
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setComment(e.currentTarget.value);
+  };
+  const onFinish = (key: React.Key) => {
+    const updateDataSource = [...dataSource];
+    const index = updateDataSource.findIndex((item) => key === item.key);
+    const item = updateDataSource[index];
+    updateDataSource.splice(index, 1, { ...item, comment: comment });
+    setDataSource(updateDataSource);
+    console.log(updateDataSource);
+    setEditingKey('');
+  };
+  const onPressEnter = (e: KeyboardEvent<HTMLDivElement>, key: React.Key) => {
+    if (e.key === 'Enter') {
+      onFinish(key);
+    }
+  };
+
+  const columns: ColumnsType<AdPlatformScheme> = [
+    {
+      title: 'Рекламная площадка',
+      dataIndex: 'platform',
+      key: 'platform',
+    },
+    {
+      title: 'ID аккаунта',
+      dataIndex: 'accountId',
+      key: 'accountId',
+    },
+    {
+      title: 'Дата изменения',
+      dataIndex: 'date',
+      key: 'date',
+    },
+    {
+      title: 'Комментарий',
+      dataIndex: 'comment',
+      key: 'comment',
+      render: (text, record) => {
+        if (record.key === editingKey) {
+          return (
+            <Form.Item
+              key={record.key}
+              name={'comment'}
+              style={{ marginBottom: 0 }}
+              rules={[
+                {
+                  max: 20,
+                  message: 'Длина не должна превышать 20 символов',
+                },
+              ]}
+            >
+              <Input
+                onChange={onChange}
+                onBlur={() => onFinish(record.key)}
+                onKeyPress={(e) => onPressEnter(e, record.key)}
+              />
+            </Form.Item>
+          );
+        } else {
+          return (
+            <p style={{ marginLeft: 10 }} onDoubleClick={() => setEditingKey(record.key)}>
+              {text}
+            </p>
+          );
+        }
+      },
+    },
+    {
+      key: 'action',
+      render: (_, record: AdPlatformScheme) => {
+        const editable = isEditing(record);
+        return !editable ? (
+          <EditOutlined
+            onClick={() => {
+              form.setFieldValue('comment', record.comment);
+              setEditingKey(record.key);
+            }}
+          />
+        ) : (
+          <SaveOutlined onClick={() => onFinish(record.key)} />
+        );
+      },
+    },
+  ];
+
   const rowSelection = {
     onChange: (selectedRowKeys: React.Key[], selectedRows: AdPlatformScheme[]) => {
-      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+      onSelectedRows(selectedRows);
+      onDisabled(!Boolean(selectedRows.length));
+      console.log('selectedRows: ', selectedRows);
     },
     getCheckboxProps: (record: AdPlatformScheme) => ({
       disabled: record.platform === 'Disabled User',
@@ -86,26 +141,20 @@ export const AdPlatformList = ({ className }: AdPlatformListProps) => {
     }),
   };
 
-  const handleOpenUpdateModal = useCallback((id: string) => {
-    setShowUpdateModal(true);
-    setCurrentId(id);
-  }, []);
-
-  const onCloseUpdateModal = useCallback(() => {
-    setShowUpdateModal(false);
-  }, []);
-
   return (
     <>
-      <Table
-        rowSelection={{
-          type: 'checkbox',
-          ...rowSelection,
-        }}
-        pagination={false}
-        dataSource={data}
-        columns={columns}
-      />
+      <Form form={form} onFinish={onFinish}>
+        <Table
+          rowSelection={{
+            type: 'checkbox',
+            ...rowSelection,
+          }}
+          pagination={false}
+          dataSource={dataSource}
+          columns={columns}
+          rowClassName="editable-row"
+        />
+      </Form>
     </>
   );
 };

@@ -4,13 +4,13 @@ import { Button, ButtonTheme } from '../../../../shared/ui/Button/Button';
 import { classNames } from '../../../../shared/classNames/classNames';
 import cls from '../../../delegation/DelegationForm.module.css';
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { AdPlatformForm } from '../AdPlatformForm/AdPlatformForm';
+import { AddPlatformForm } from '../AddPlatformForm/AddPlatformForm';
 
-interface AdPlatformModalProps {
+interface AddPlatformModalProps {
   className?: string;
 }
 
-export const AdPlatformModal = ({ className }: AdPlatformModalProps) => {
+export const AddPlatformModal = ({ className }: AddPlatformModalProps) => {
   const [isCreateModal, setIsCreateModal] = useState(false);
 
   const onShowModal = useCallback(() => {
@@ -33,7 +33,7 @@ export const AdPlatformModal = ({ className }: AdPlatformModalProps) => {
           isOpen={isCreateModal}
           onClose={onCloseModal}
         >
-          <AdPlatformForm onClose={onCloseModal} />
+          <AddPlatformForm onClose={onCloseModal} />
         </Modal>
       )}
     </>

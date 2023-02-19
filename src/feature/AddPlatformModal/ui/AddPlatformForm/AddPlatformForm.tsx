@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigProvider, Select } from 'antd';
+import { ConfigProvider, Select, Form } from 'antd';
 import { classNames } from '../../../../shared/classNames/classNames';
 import cls from './AdPlatformForm.module.css';
 import { CloseOutlined } from '@ant-design/icons';
@@ -7,7 +7,7 @@ import { Button, ButtonSize, ButtonTheme } from '../../../../shared/ui/Button/Bu
 
 const { Option } = Select;
 
-interface AdPlatformFormProps {
+interface AddPlatformFormProps {
   className?: string;
   onClose: () => void;
 }
@@ -18,7 +18,8 @@ const data = [
   { value: 'mytarget3', title: 'MyTarget3' },
 ];
 
-export const AdPlatformForm = ({ onClose }: AdPlatformFormProps) => {
+export const AddPlatformForm = ({ onClose }: AddPlatformFormProps) => {
+  const [form] = Form.useForm();
   const onCancel = () => {
     onClose();
   };
@@ -32,7 +33,7 @@ export const AdPlatformForm = ({ onClose }: AdPlatformFormProps) => {
         </p>
         <CloseOutlined className={cls.closeIcon} onClick={onCancel} />
       </div>
-      <form>
+      <Form>
         <ConfigProvider
           theme={{
             token: {
@@ -108,7 +109,7 @@ export const AdPlatformForm = ({ onClose }: AdPlatformFormProps) => {
             </Button>
           </div>
         </ConfigProvider>
-      </form>
+      </Form>
     </div>
   );
 };
