@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState, KeyboardEvent } from 'react';
+import React, { ChangeEvent, KeyboardEvent, useCallback, useState } from 'react';
 import { AdPlatformScheme } from '../model/types/adPlatforms';
 import { ColumnsType } from 'antd/es/table';
-import { Form, Input, Table } from 'antd';
+import { Input, Table } from 'antd';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
 
 interface AdPlatformListProps {
@@ -11,7 +11,6 @@ interface AdPlatformListProps {
 }
 
 export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlatformListProps) => {
-  const [form] = Form.useForm();
   const data: AdPlatformScheme[] = [
     {
       key: '1',
@@ -38,15 +37,17 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
 
   const [dataSource, setDataSource] = useState<AdPlatformScheme[]>(data);
   const [editingKey, setEditingKey] = useState<string>('');
-  const [comment, setComment] = useState<string>('');
+  const [comment, setComment] = useState<string | undefined>('');
   //const [selectedRows, setSelectedRows] = useState<AdPlatformScheme[]>([]);
 
   const isEditing = (record: AdPlatformScheme) => record.key === editingKey;
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setComment(e.currentTarget.value);
-  };
-  const onFinish = (key: React.Key) => {
+  }, []);
+
+  const onFinish = (key: React.Key, record: AdPlatformScheme) => {
+    setComment(record.comment);
     const updateDataSource = [...dataSource];
     const index = updateDataSource.findIndex((item) => key === item.key);
     const item = updateDataSource[index];
@@ -55,9 +56,14 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
     console.log(updateDataSource);
     setEditingKey('');
   };
-  const onPressEnter = (e: KeyboardEvent<HTMLDivElement>, key: React.Key) => {
+
+  const onPressEnter = (
+    e: KeyboardEvent<HTMLDivElement>,
+    key: React.Key,
+    record: AdPlatformScheme,
+  ) => {
     if (e.key === 'Enter') {
-      onFinish(key);
+      onFinish(key, record);
     }
   };
 
@@ -83,31 +89,18 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
       key: 'comment',
       render: (text, record) => {
         if (record.key === editingKey) {
+          console.log(comment);
           return (
-            <Form.Item
-              key={record.key}
-              name={'comment'}
-              style={{ marginBottom: 0 }}
-              rules={[
-                {
-                  max: 20,
-                  message: 'Длина не должна превышать 20 символов',
-                },
-              ]}
-            >
-              <Input
-                onChange={onChange}
-                onBlur={() => onFinish(record.key)}
-                onKeyPress={(e) => onPressEnter(e, record.key)}
-              />
-            </Form.Item>
+            <Input
+              onChange={onChange}
+              autoFocus
+              onBlur={() => onFinish(record.key, record)}
+              onKeyPress={(e) => onPressEnter(e, record.key, record)}
+              value={comment}
+            />
           );
         } else {
-          return (
-            <p style={{ marginLeft: 10 }} onDoubleClick={() => setEditingKey(record.key)}>
-              {text}
-            </p>
-          );
+          return <p style={{ marginLeft: 10 }}>{text}</p>;
         }
       },
     },
@@ -118,12 +111,12 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
         return !editable ? (
           <EditOutlined
             onClick={() => {
-              form.setFieldValue('comment', record.comment);
               setEditingKey(record.key);
+              setComment(record.comment);
             }}
           />
         ) : (
-          <SaveOutlined onClick={() => onFinish(record.key)} />
+          <SaveOutlined onClick={() => onFinish(record.key, record)} />
         );
       },
     },
@@ -140,21 +133,18 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
       name: record.platform,
     }),
   };
-
   return (
     <>
-      <Form form={form} onFinish={onFinish}>
-        <Table
-          rowSelection={{
-            type: 'checkbox',
-            ...rowSelection,
-          }}
-          pagination={false}
-          dataSource={dataSource}
-          columns={columns}
-          rowClassName="editable-row"
-        />
-      </Form>
+      <Table
+        rowSelection={{
+          type: 'checkbox',
+          ...rowSelection,
+        }}
+        pagination={false}
+        dataSource={dataSource}
+        columns={columns}
+        rowClassName="editable-row"
+      />
     </>
   );
 };
