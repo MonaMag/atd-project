@@ -4,7 +4,7 @@ import { Button, ButtonTheme } from '../../shared/ui/Button/Button';
 import cls from './DelegationForm.module.css';
 import { AddPlatformModal } from '../AddPlatformModal/ui/AddPlatformModal/AddPlatformModal';
 import { AdPlatformList } from '../../entities/AdPlatform/ui/AdPlatformList';
-import { AdPlatformScheme } from '../../entities/AdPlatform/model/types/adPlatforms';
+import { AdPlatform } from '../../entities/AdPlatform/model/types/adPlatforms';
 
 interface DelegationFormProps {
   className?: string;
@@ -13,13 +13,13 @@ interface DelegationFormProps {
 
 export const DelegationForm = ({ className, onClose }: DelegationFormProps) => {
   const [hasSelected, setHasSelected] = useState<boolean>(true);
-  const [selectedRows, setSelectedRows] = useState<AdPlatformScheme[]>([]);
+  const [selectedRows, setSelectedRows] = useState<AdPlatform[]>([]);
 
   const handleDisabled = useCallback((isDisabled: boolean) => {
     setHasSelected(isDisabled);
   }, []);
 
-  const handleSelectedRows = useCallback((selectedRows: AdPlatformScheme[]) => {
+  const handleSelectedRows = useCallback((selectedRows: AdPlatform[]) => {
     setSelectedRows(selectedRows);
   }, []);
 

@@ -1,15 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { classNames } from '../../../../shared/classNames/classNames';
 import { AppLink } from 'shared/ui/AppLink/AppLink';
-import { Button, ButtonSize, ButtonTheme } from '../../../../shared/ui/Button/Button';
+import { Button, ButtonTheme } from '../../../../shared/ui/Button/Button';
 import logo from '../../../../shared/assets/logo/Logo.png';
 import { ReactComponent as ProfileIcon } from '../../../../shared/assets/icons/profile.svg';
 import { ReactComponent as UserIcon } from '../../../../shared/assets/icons/sheets.svg';
 import { ReactComponent as AuditorsIcon } from '../../../../shared/assets/icons/settings_segment.svg';
 import { ReactComponent as MagazineIcon } from '../../../../shared/assets/icons/magazine.svg';
 import cls from './Sidebar.module.css';
-import { Modal } from '../../../../shared/ui/Modal/Modal';
-import { DescriptionForm } from '../../../../feature/segmentDescription/DescriptionForm';
 import { DelegationModal } from '../../../../feature/delegation/DelegationModal';
 
 interface SidebarProps {
@@ -56,7 +54,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
       </div>
       <div className={cls.volume}>
         <span className={cls.digit}>44 756 256</span>
-        <Button
+        {/*<Button
           theme={ButtonTheme.BACKGROUND}
           onClick={onShowModal}
           className={cls.btn}
@@ -72,7 +70,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
           >
             <DescriptionForm onClose={onCloseModal} />
           </Modal>
-        )}
+        )}*/}
         <Button
           theme={ButtonTheme.BACKGROUND_INVERTED}
           className={cls.btn}

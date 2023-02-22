@@ -8,8 +8,7 @@
     font-weight: 400;
 }
 
-.app,
-.app_modal {
+.app {
     font-size: var(--font-s);
     color: var(--primary-color);
 }

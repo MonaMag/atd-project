@@ -143,7 +143,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
                 <div className={cls.headerTagsWrapper}>
                   <div className={cls.tagsIncludeWrapper}>
                     {category.displayParams.enableExclude && includeCheckedKey.length > 0 && (
-                      <span className={cls.spanInc}>Включить: </span>
+                      <span className={cls.headerSpan}>Включить: </span>
                     )}
                     {includeCheckedKey.length > 0 &&
                       includeCheckedKey
@@ -159,7 +159,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
 
                   <div className={cls.tagsExcludeWrapper}>
                     {category.displayParams.enableExclude && excludeCheckedKey.length > 0 && (
-                      <span className={cls.spanInc}>Исключить: </span>
+                      <span className={cls.headerSpan}>Исключить: </span>
                     )}
                     {excludeCheckedKey.length > 0 &&
                       excludeCheckedKey

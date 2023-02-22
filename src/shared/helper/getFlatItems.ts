@@ -1,6 +1,6 @@
-import { Subcategory } from '../../entities/Category/model/types/categories';
+import { CategoryItem } from '../../entities/Category/model/types/categories';
 
-export const getFlatItems = (items: Subcategory[]): Subcategory[] => {
+export const getFlatItems = (items: CategoryItem[]): CategoryItem[] => {
   const result = [];
 
   for (const item of items) {

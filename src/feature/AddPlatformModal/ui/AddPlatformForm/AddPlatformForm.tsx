@@ -1,9 +1,12 @@
-import React from 'react';
-import { ConfigProvider, Select, Form } from 'antd';
+import React, { useState } from 'react';
+import { Form, Input, Select } from 'antd';
 import { classNames } from '../../../../shared/classNames/classNames';
-import cls from './AdPlatformForm.module.css';
+import cls from './AddPlatformForm.module.css';
 import { CloseOutlined } from '@ant-design/icons';
-import { Button, ButtonSize, ButtonTheme } from '../../../../shared/ui/Button/Button';
+import { Button, ButtonTheme } from '../../../../shared/ui/Button/Button';
+import { AdPlatform } from '../../../../entities/AdPlatform/model/types/adPlatforms';
+import { useDispatch } from 'react-redux';
+import { addPlatformActions } from '../../model/slice/addPlatformSlice';
 
 const { Option } = Select;
 
@@ -19,9 +22,29 @@ const data = [
 ];
 
 export const AddPlatformForm = ({ onClose }: AddPlatformFormProps) => {
+  const dispatch = useDispatch();
+
+  const [selected, setSelected] = useState<string>('');
   const [form] = Form.useForm();
+
   const onCancel = () => {
     onClose();
+  };
+
+  const handleOnChange = (value: string) => {
+    setSelected(value);
+    form.setFieldValue('platform', value);
+    console.log('jnCHAHGE', selected);
+  };
+  /*  const handleOnChange = (value: string) => {
+    setSelected(value);
+    form.setFieldsValue({ platform: value });
+    console.log('jnCHAHGE', value);
+  };*/
+  const onFinish = (values: AdPlatform) => {
+    dispatch(addPlatformActions.addPlatform(values));
+    onClose();
+    console.log('ONFINISH', values);
   };
 
   return (
@@ -33,82 +56,66 @@ export const AddPlatformForm = ({ onClose }: AddPlatformFormProps) => {
         </p>
         <CloseOutlined className={cls.closeIcon} onClick={onCancel} />
       </div>
-      <Form>
-        <ConfigProvider
-          theme={{
-            token: {
-              controlHeightLG: 60,
-              colorBorder: '#3fcbff',
-              colorBorderSecondary: '#3fcbff',
-            },
-          }}
-        >
-          <div className={cls.inputWrapper}>
-            <div className={cls.item}>
-              <label htmlFor="platform" className={cls.inputLabel}>
-                Рекламная площадка
-              </label>
-              <div className={cls.field}>
-                <Select
-                  id="platform"
-                  size={'large'}
-                  defaultValue={'mytarget'}
-                  className={cls.select}
-                >
-                  {data.map((el) => {
-                    return (
-                      <Option key={el.title} value={el.value}>
-                        {el.title}
-                      </Option>
-                    );
-                  })}
-                </Select>
-              </div>
+      <Form name="add-platform" form={form} onFinish={onFinish}>
+        <div className={cls.inputWrapper}>
+          <Form.Item className={cls.item} name={'platform'} label={'Рекламная площадка'}>
+            {/* <label htmlFor="platform" className={cls.inputLabel}>
+              Рекламная площадка
+            </label>*/}
+            <div className={cls.field}>
+              <Select
+                id="platform"
+                placeholder={'Выберите рекламную площадку '}
+                className={cls.select}
+                onChange={handleOnChange}
+              >
+                {data.map((el) => {
+                  return (
+                    <Option key={el.title} value={el.value}>
+                      {el.title}
+                    </Option>
+                  );
+                })}
+              </Select>
             </div>
+          </Form.Item>
 
-            <div className={cls.item}>
-              <label htmlFor="accountId" className={cls.inputLabel}>
-                ID аккаунта
-              </label>
-              <div className={cls.field}>
-                <input
-                  id="accountId"
-                  type="text"
-                  className={cls.input}
-                  placeholder={'Введите ID ЛК рекламной площадки'}
-                />
-              </div>
+          <Form.Item className={cls.item} name={'accountId'} label={'ID аккаунта'}>
+            {/*<label htmlFor="accountId" className={cls.inputLabel}>
+              ID аккаунта
+            </label>*/}
+            <div className={cls.field}>
+              <Input
+                id="accountId"
+                type="text"
+                className={cls.input}
+                placeholder={'Введите ID ЛК рекламной площадки'}
+              />
             </div>
+          </Form.Item>
 
-            <div className={cls.item}>
-              <label htmlFor="comment" className={cls.inputLabel}>
-                Комментарий
-              </label>
-              <div className={cls.field}>
-                <input id="comment" type="text" className={cls.input} placeholder={'Комментарий'} />
-              </div>
+          <Form.Item className={cls.item} name={'comment'} label={'Комментарий'}>
+            {/* <label htmlFor="comment" className={cls.inputLabel}>
+              Комментарий
+            </label>*/}
+            <div className={cls.field}>
+              <Input id="comment" type="text" className={cls.input} placeholder={'Комментарий'} />
             </div>
-          </div>
+          </Form.Item>
+        </div>
 
-          <div className={cls.buttonWrapper}>
-            <Button
-              type="submit"
-              size={ButtonSize.M}
-              theme={ButtonTheme.BACKGROUND}
-              className={cls.userBtn}
-            >
+        <div className={cls.buttonWrapper}>
+          <Form.Item>
+            <Button type="submit" className={cls.userBtn} theme={ButtonTheme.BACKGROUND}>
               Сохранить
             </Button>
-            <Button
-              size={ButtonSize.M}
-              theme={ButtonTheme.CLEAR}
-              className={cls.userBtn}
-              onClick={onCancel}
-            >
+          </Form.Item>
+          <Form.Item>
+            <Button className={cls.userBtn} onClick={onCancel} theme={ButtonTheme.CLEAR}>
               Отмена
             </Button>
-          </div>
-        </ConfigProvider>
+          </Form.Item>
+        </div>
       </Form>
     </div>
   );

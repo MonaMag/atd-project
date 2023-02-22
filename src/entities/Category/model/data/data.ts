@@ -25,13 +25,7 @@ export function getData(): CategorySchema[] {
         enableExclude: false,
         enableSearch: false,
       },
-      items: [
-        { key: '003', title: '18-24 года' },
-        { key: '004', title: '25-34 года' },
-        { key: '005', title: '35-44 года' },
-        { key: '006', title: '45-54 года' },
-        { key: '007', title: '55 и старше' },
-      ],
+      items: [],
     },
     {
       id: 3,
@@ -46,7 +40,29 @@ export function getData(): CategorySchema[] {
         { key: '008', title: 'Москва' },
         { key: '009', title: 'Московская область' },
         { key: '010', title: 'Санкт-Петербург' },
-        { key: '011', title: 'Ленинградская область' },
+        {
+          key: '011',
+          title: 'Ленинградская область',
+          children: [
+            { key: '0110', title: 'Выборг' },
+            { key: '0111', title: 'Волхов' },
+            { key: '0112', title: 'Кировск' },
+            { key: '0113', title: 'Сосновый бор' },
+            { key: '0114', title: 'Отрадное' },
+          ],
+        },
+        {
+          key: '044',
+          title: 'Тульская область',
+          children: [
+            { key: '0410', title: 'Богородицк' },
+            { key: '0411', title: 'Ефремов' },
+            { key: '0412', title: 'Новомосковск' },
+            { key: '0413', title: 'Тула' },
+            { key: '0414', title: 'Щекино' },
+          ],
+        },
+        { key: '045', title: 'Тверская область' },
       ],
     },
     {

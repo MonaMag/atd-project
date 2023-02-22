@@ -21,14 +21,11 @@
     text-align: center;
 }
 
-.closeIcon {
-
-}
-
 .inputWrapper {
     display: flex;
     flex-direction: column;
     margin: 10px 0 30px;
+
 }
 
 .field{
@@ -36,6 +33,7 @@
     flex-direction: column;
     align-items: flex-start;
     height: 60px;
+
 }
 
 .input {
@@ -46,6 +44,7 @@
     margin-top: 10px;
     padding: 20px 16px;
     width: 360px;
+
 }
 
 .select {
@@ -54,8 +53,7 @@
     border-radius: 8px;
     margin-top: 10px;
     color: var(--input-text-color);
-    width: 360px;
-    font-weight: 600;
+    font-size: var(--font-s);
 }
 
 .input:focus {
@@ -78,7 +76,28 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.item :global(.ant-form-item-label) {
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: var(--font-s);
+}
+.item :global(.ant-form-item-label label) {
+    font-size: var(--font-s);
+}
+
+.item :global(.ant-form-item-control) {
+    width: 360px;
+    height: 60px;
+}
+.field :global(.ant-select .ant-select-selector) {
+    height: 60px;
+    display: flex;
+    align-items: center;
 }
 
 .buttonWrapper{

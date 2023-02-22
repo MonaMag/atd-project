@@ -1,52 +1,52 @@
 import React, { ChangeEvent, KeyboardEvent, useCallback, useState } from 'react';
-import { AdPlatformScheme } from '../model/types/adPlatforms';
+import { AdPlatform } from '../model/types/adPlatforms';
 import { ColumnsType } from 'antd/es/table';
 import { Input, Table } from 'antd';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import { getAddPlatforms } from '../../../feature/AddPlatformModal/model/selectors/addPlatform';
 
 interface AdPlatformListProps {
   className?: string;
   onDisabled: (isDisabled: boolean) => void;
-  onSelectedRows: (selectedRows: AdPlatformScheme[]) => void;
+  onSelectedRows: (selectedRows: AdPlatform[]) => void;
 }
 
 export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlatformListProps) => {
-  const data: AdPlatformScheme[] = [
+  const platforms = useSelector(getAddPlatforms);
+  const data: AdPlatform[] = [
     {
       key: '1',
       platform: 'MyTarget',
       accountId: '123456789',
-      date: '12.02.2023',
       comment: 'Рабочий ЛК',
     },
     {
       key: '2',
       platform: 'MyTarget2',
       accountId: '123456789',
-      date: '14.04.2023',
       comment: 'Рабочий ЛК',
     },
     {
       key: '3',
       platform: 'MyTarget3',
       accountId: '123456789',
-      date: '16.06.2023',
       comment: 'Рабочий ЛК',
     },
   ];
 
-  const [dataSource, setDataSource] = useState<AdPlatformScheme[]>(data);
+  const [dataSource, setDataSource] = useState<AdPlatform[]>(data);
   const [editingKey, setEditingKey] = useState<string>('');
   const [comment, setComment] = useState<string | undefined>('');
   //const [selectedRows, setSelectedRows] = useState<AdPlatformScheme[]>([]);
 
-  const isEditing = (record: AdPlatformScheme) => record.key === editingKey;
+  const isEditing = (record: AdPlatform) => record.key === editingKey;
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setComment(e.currentTarget.value);
   }, []);
 
-  const onFinish = (key: React.Key, record: AdPlatformScheme) => {
+  const onFinish = (key: React.Key, record: AdPlatform) => {
     setComment(record.comment);
     const updateDataSource = [...dataSource];
     const index = updateDataSource.findIndex((item) => key === item.key);
@@ -57,17 +57,13 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
     setEditingKey('');
   };
 
-  const onPressEnter = (
-    e: KeyboardEvent<HTMLDivElement>,
-    key: React.Key,
-    record: AdPlatformScheme,
-  ) => {
+  const onPressEnter = (e: KeyboardEvent<HTMLDivElement>, key: React.Key, record: AdPlatform) => {
     if (e.key === 'Enter') {
       onFinish(key, record);
     }
   };
 
-  const columns: ColumnsType<AdPlatformScheme> = [
+  const columns: ColumnsType<AdPlatform> = [
     {
       title: 'Рекламная площадка',
       dataIndex: 'platform',
@@ -106,7 +102,7 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
     },
     {
       key: 'action',
-      render: (_, record: AdPlatformScheme) => {
+      render: (_, record: AdPlatform) => {
         const editable = isEditing(record);
         return !editable ? (
           <EditOutlined
@@ -123,12 +119,12 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
   ];
 
   const rowSelection = {
-    onChange: (selectedRowKeys: React.Key[], selectedRows: AdPlatformScheme[]) => {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: AdPlatform[]) => {
       onSelectedRows(selectedRows);
       onDisabled(!Boolean(selectedRows.length));
       console.log('selectedRows: ', selectedRows);
     },
-    getCheckboxProps: (record: AdPlatformScheme) => ({
+    getCheckboxProps: (record: AdPlatform) => ({
       disabled: record.platform === 'Disabled User',
       name: record.platform,
     }),
@@ -141,7 +137,7 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
           ...rowSelection,
         }}
         pagination={false}
-        dataSource={dataSource}
+        dataSource={platforms}
         columns={columns}
         rowClassName="editable-row"
       />
