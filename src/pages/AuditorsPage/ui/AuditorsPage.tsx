@@ -2,28 +2,44 @@ import React, { useEffect } from 'react';
 import cls from './AuditorsPage.module.css';
 import { Page } from '../../../widgets/Page/Page';
 import { classNames } from '../../../shared/classNames/classNames';
-import { getData } from '../../../entities/Category/model/data/data';
 import CategoryList from '../../../entities/Category/ui/CategoryList/CategoryList';
+import {
+  getCategoryData,
+  getCategoryError,
+  getCategoryIsLoading,
+} from '../../../entities/Category/model/selectors/getCategories';
+import { fetchCategory } from '../../../entities/Category/model/services/fetchCategory';
+import { useAppDispatch } from '../../../shared/hooks/useAppDispatch';
+import { useAppSelector } from '../../../shared/hooks/useAppSelector';
 
 interface AuditorPageProps {
-    className?: string;
+  className?: string;
 }
 
-const categories = getData();
+//const categories = getData();
 
 const AuditorsPage: React.FC<AuditorPageProps> = ({ className }) => {
-    useEffect(() => {}, []);
+  const dispatch = useAppDispatch();
+  const categories = useAppSelector(getCategoryData);
+  const error = useAppSelector(getCategoryError);
+  const isLoading = useAppSelector(getCategoryIsLoading);
 
-    return (
-        <Page className={classNames(cls.auditorsPage, {}, [className])}>
-            <div className={cls.header}>Аудитория</div>
-            <div className={cls.auditorsContent}>
-                {categories.map((category, index) => {
-                    return <CategoryList key={index} category={category} />;
-                })}
-            </div>
-        </Page>
-    );
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, [dispatch]);
+
+  return (
+    <Page className={classNames(cls.auditorsPage, {}, [className])}>
+      <div className={cls.header}>Аудитория</div>
+      <div className={cls.auditorsContent}>
+        {isLoading && <h2>Loading...</h2>}
+        {error && <h2>An error occurred: {error}</h2>}
+        {categories.map((category, index) => {
+          return <CategoryList key={index} category={category} />;
+        })}
+      </div>
+    </Page>
+  );
 };
 
 export default AuditorsPage;

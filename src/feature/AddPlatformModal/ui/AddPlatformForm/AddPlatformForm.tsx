@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Form, Input, Select } from 'antd';
 import { classNames } from '../../../../shared/classNames/classNames';
 import cls from './AddPlatformForm.module.css';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button, ButtonTheme } from '../../../../shared/ui/Button/Button';
-import { AdPlatform } from '../../../../entities/AdPlatform/model/types/adPlatforms';
-import { useDispatch } from 'react-redux';
+import { Platform } from '../../../../entities/Platform/model/types/platforms';
+import { useAppDispatch } from '../../../../shared/hooks/useAppDispatch';
 import { addPlatformActions } from '../../model/slice/addPlatformSlice';
 
 const { Option } = Select;
@@ -22,7 +22,7 @@ const data = [
 ];
 
 export const AddPlatformForm = ({ onClose }: AddPlatformFormProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [selected, setSelected] = useState<string>('');
   const [form] = Form.useForm();
@@ -34,18 +34,17 @@ export const AddPlatformForm = ({ onClose }: AddPlatformFormProps) => {
   const handleOnChange = (value: string) => {
     setSelected(value);
     form.setFieldValue('platform', value);
-    console.log('jnCHAHGE', selected);
   };
-  /*  const handleOnChange = (value: string) => {
-    setSelected(value);
-    form.setFieldsValue({ platform: value });
-    console.log('jnCHAHGE', value);
-  };*/
-  const onFinish = (values: AdPlatform) => {
-    dispatch(addPlatformActions.addPlatform(values));
-    onClose();
-    console.log('ONFINISH', values);
-  };
+
+  const handleAddPlatform = useCallback(
+    (values: Platform) => {
+      dispatch(addPlatformActions.addPlatform(values));
+      //dispatch(addPlatforms(values));
+      onClose();
+      console.log('ADD PLATFORM', values);
+    },
+    [dispatch],
+  );
 
   return (
     <div className={classNames(cls.adPlatformForm, {}, [])}>
@@ -56,12 +55,9 @@ export const AddPlatformForm = ({ onClose }: AddPlatformFormProps) => {
         </p>
         <CloseOutlined className={cls.closeIcon} onClick={onCancel} />
       </div>
-      <Form name="add-platform" form={form} onFinish={onFinish}>
+      <Form name="add-platform" form={form} onFinish={handleAddPlatform}>
         <div className={cls.inputWrapper}>
           <Form.Item className={cls.item} name={'platform'} label={'Рекламная площадка'}>
-            {/* <label htmlFor="platform" className={cls.inputLabel}>
-              Рекламная площадка
-            </label>*/}
             <div className={cls.field}>
               <Select
                 id="platform"
@@ -81,9 +77,6 @@ export const AddPlatformForm = ({ onClose }: AddPlatformFormProps) => {
           </Form.Item>
 
           <Form.Item className={cls.item} name={'accountId'} label={'ID аккаунта'}>
-            {/*<label htmlFor="accountId" className={cls.inputLabel}>
-              ID аккаунта
-            </label>*/}
             <div className={cls.field}>
               <Input
                 id="accountId"

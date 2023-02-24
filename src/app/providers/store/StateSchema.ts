@@ -3,10 +3,12 @@ import { CategorySchema } from '../../../entities/Category/model/types/categorie
 import { AxiosInstance } from 'axios';
 import { AppDispatch } from './store';
 import { AddPlatformSchema } from '../../../feature/AddPlatformModal/model/types/addPlatform';
+import { PlatformSchema } from '../../../entities/Platform/model/types/platforms';
 
 export interface StateSchema {
   user: UserSchema;
   category: CategorySchema;
+  platform: PlatformSchema;
   addPlatform: AddPlatformSchema;
 }
 

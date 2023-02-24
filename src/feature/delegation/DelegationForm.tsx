@@ -3,8 +3,8 @@ import { CloseOutlined } from '@ant-design/icons';
 import { Button, ButtonTheme } from '../../shared/ui/Button/Button';
 import cls from './DelegationForm.module.css';
 import { AddPlatformModal } from '../AddPlatformModal/ui/AddPlatformModal/AddPlatformModal';
-import { AdPlatformList } from '../../entities/AdPlatform/ui/AdPlatformList';
-import { AdPlatform } from '../../entities/AdPlatform/model/types/adPlatforms';
+import { PlatformList } from '../../entities/Platform/ui/PlatformList';
+import { Platform } from '../../entities/Platform/model/types/platforms';
 
 interface DelegationFormProps {
   className?: string;
@@ -13,13 +13,13 @@ interface DelegationFormProps {
 
 export const DelegationForm = ({ className, onClose }: DelegationFormProps) => {
   const [hasSelected, setHasSelected] = useState<boolean>(true);
-  const [selectedRows, setSelectedRows] = useState<AdPlatform[]>([]);
+  const [selectedRows, setSelectedRows] = useState<Platform[]>([]);
 
   const handleDisabled = useCallback((isDisabled: boolean) => {
     setHasSelected(isDisabled);
   }, []);
 
-  const handleSelectedRows = useCallback((selectedRows: AdPlatform[]) => {
+  const handleSelectedRows = useCallback((selectedRows: Platform[]) => {
     setSelectedRows(selectedRows);
   }, []);
 
@@ -46,7 +46,7 @@ export const DelegationForm = ({ className, onClose }: DelegationFormProps) => {
       </div>
 
       <div className={cls.descriptionList}>
-        <AdPlatformList onDisabled={handleDisabled} onSelectedRows={handleSelectedRows} />
+        <PlatformList onDisabled={handleDisabled} onSelectedRows={handleSelectedRows} />
       </div>
     </div>
   );

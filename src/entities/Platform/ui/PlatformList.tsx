@@ -1,52 +1,34 @@
-import React, { ChangeEvent, KeyboardEvent, useCallback, useState } from 'react';
-import { AdPlatform } from '../model/types/adPlatforms';
+import React, { ChangeEvent, KeyboardEvent, useCallback, useEffect, useState } from 'react';
+import { Platform } from '../model/types/platforms';
 import { ColumnsType } from 'antd/es/table';
 import { Input, Table } from 'antd';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
-import { getAddPlatforms } from '../../../feature/AddPlatformModal/model/selectors/addPlatform';
+import { useAppDispatch } from '../../../shared/hooks/useAppDispatch';
+import { fetchPlatforms } from '../model/services/fetchPlatforms';
+import { getPlatforms } from '../../../feature/AddPlatformModal/model/selectors/getPlatforms';
 
-interface AdPlatformListProps {
+interface PlatformListProps {
   className?: string;
   onDisabled: (isDisabled: boolean) => void;
-  onSelectedRows: (selectedRows: AdPlatform[]) => void;
+  onSelectedRows: (selectedRows: Platform[]) => void;
 }
 
-export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlatformListProps) => {
-  const platforms = useSelector(getAddPlatforms);
-  const data: AdPlatform[] = [
-    {
-      key: '1',
-      platform: 'MyTarget',
-      accountId: '123456789',
-      comment: 'Рабочий ЛК',
-    },
-    {
-      key: '2',
-      platform: 'MyTarget2',
-      accountId: '123456789',
-      comment: 'Рабочий ЛК',
-    },
-    {
-      key: '3',
-      platform: 'MyTarget3',
-      accountId: '123456789',
-      comment: 'Рабочий ЛК',
-    },
-  ];
+export const PlatformList = ({ onDisabled, onSelectedRows }: PlatformListProps) => {
+  const dispatch = useAppDispatch();
+  const platforms = useSelector(getPlatforms);
 
-  const [dataSource, setDataSource] = useState<AdPlatform[]>(data);
+  const [dataSource, setDataSource] = useState<Platform[]>(platforms);
   const [editingKey, setEditingKey] = useState<string>('');
   const [comment, setComment] = useState<string | undefined>('');
-  //const [selectedRows, setSelectedRows] = useState<AdPlatformScheme[]>([]);
 
-  const isEditing = (record: AdPlatform) => record.key === editingKey;
+  const isEditing = (record: Platform) => record.key === editingKey;
 
   const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     setComment(e.currentTarget.value);
   }, []);
 
-  const onFinish = (key: React.Key, record: AdPlatform) => {
+  const handleUpdateComment = (key: React.Key, record: Platform) => {
     setComment(record.comment);
     const updateDataSource = [...dataSource];
     const index = updateDataSource.findIndex((item) => key === item.key);
@@ -57,13 +39,13 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
     setEditingKey('');
   };
 
-  const onPressEnter = (e: KeyboardEvent<HTMLDivElement>, key: React.Key, record: AdPlatform) => {
+  const onPressEnter = (e: KeyboardEvent<HTMLDivElement>, key: React.Key, record: Platform) => {
     if (e.key === 'Enter') {
-      onFinish(key, record);
+      handleUpdateComment(key, record);
     }
   };
 
-  const columns: ColumnsType<AdPlatform> = [
+  const columns: ColumnsType<Platform> = [
     {
       title: 'Рекламная площадка',
       dataIndex: 'platform',
@@ -90,7 +72,7 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
             <Input
               onChange={onChange}
               autoFocus
-              onBlur={() => onFinish(record.key, record)}
+              onBlur={() => handleUpdateComment(record.key, record)}
               onKeyPress={(e) => onPressEnter(e, record.key, record)}
               value={comment}
             />
@@ -102,7 +84,7 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
     },
     {
       key: 'action',
-      render: (_, record: AdPlatform) => {
+      render: (_, record: Platform) => {
         const editable = isEditing(record);
         return !editable ? (
           <EditOutlined
@@ -112,23 +94,24 @@ export const AdPlatformList = ({ className, onDisabled, onSelectedRows }: AdPlat
             }}
           />
         ) : (
-          <SaveOutlined onClick={() => onFinish(record.key, record)} />
+          <SaveOutlined onClick={() => handleUpdateComment(record.key, record)} />
         );
       },
     },
   ];
 
   const rowSelection = {
-    onChange: (selectedRowKeys: React.Key[], selectedRows: AdPlatform[]) => {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: Platform[]) => {
       onSelectedRows(selectedRows);
       onDisabled(!Boolean(selectedRows.length));
       console.log('selectedRows: ', selectedRows);
     },
-    getCheckboxProps: (record: AdPlatform) => ({
-      disabled: record.platform === 'Disabled User',
-      name: record.platform,
-    }),
   };
+
+  useEffect(() => {
+    dispatch(fetchPlatforms());
+  }, [dispatch]);
+
   return (
     <>
       <Table

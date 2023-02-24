@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AddPlatformSchema } from '../types/addPlatform';
-import { AdPlatform } from '../../../../entities/AdPlatform/model/types/adPlatforms';
+import { Platform } from '../../../../entities/Platform/model/types/platforms';
+import { addPlatforms } from '../services/addPlatforms';
 
 const initialState: AddPlatformSchema = {
   data: [
@@ -34,33 +35,26 @@ export const AddPlatformSlice = createSlice({
   name: 'addPlatform',
   initialState,
   reducers: {
-    addPlatform: (state: AddPlatformSchema, action: PayloadAction<AdPlatform>) => {
-      /*state.data.push({ ...action.payload });*/
+    addPlatform: (state: AddPlatformSchema, action: PayloadAction<Platform>) => {
       state.data.push(action.payload);
-    },
-    setPlatform: (state: AddPlatformSchema, action: PayloadAction<AdPlatform[]>) => {
-      state.data = action.payload;
     },
   },
 
-  /*    extraReducers: (builder) => {
-        builder
-            .addCase(fetchAdPlatforms.pending, (state) => {
-                state.error = undefined;
-                state.isLoading = true;
-            })
-            .addCase(fetchArticleById.fulfilled, (
-                state,
-                action: PayloadAction<AdPlatformScheme>,
-            ) => {
-                state.isLoading = false;
-                state.data = action.payload;
-            })
-            .addCase(fetchArticleById.rejected, (state, action) => {
-                state.isLoading = false;
-                state.error = action.payload;
-            });
-    },*/
+  extraReducers: (builder) => {
+    builder
+      .addCase(addPlatforms.pending, (state) => {
+        state.error = undefined;
+        state.isLoading = true;
+      })
+      .addCase(addPlatforms.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(addPlatforms.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      });
+  },
 });
 
 export const { actions: addPlatformActions } = AddPlatformSlice;

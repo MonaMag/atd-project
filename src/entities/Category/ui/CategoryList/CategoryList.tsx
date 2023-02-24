@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Key, useState } from 'react';
 import { Collapse, ConfigProvider, Input, Radio, RadioChangeEvent, Space, Tag } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import { CategorySchema } from '../../model/types/categories';
+import { Category } from '../../model/types/categories';
 import { getFilteredTreeData } from '../../../../shared/helper/getFilteredTreeData';
 import cls from './CategoryList.module.css';
 import { prepareTreeData } from '../../../../shared/helper/prepareTreeData';
@@ -10,13 +10,16 @@ import { SliderComponent } from '../SliderComponent/SliderComponent';
 import { AntTreeNodeCheckedEvent } from 'antd/es/tree';
 import { getFlatItems } from '../../../../shared/helper/getFlatItems';
 import { KEY_CHOOSE_All } from '../../model/consts/categoryConsts';
+import { useAppSelector } from '../../../../shared/hooks/useAppSelector';
+import { getCategoryData } from '../../model/selectors/getCategories';
 
 interface CategoryListProps {
   className?: string;
-  category: CategorySchema;
+  category: Category;
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
+  const categories = useAppSelector(getCategoryData);
   const flatItems = getFlatItems(category.items);
 
   const [searchValue, setSearchValue] = useState<string>('');

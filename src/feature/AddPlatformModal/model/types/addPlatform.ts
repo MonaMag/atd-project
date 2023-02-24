@@ -1,7 +1,7 @@
-import { AdPlatform } from '../../../../entities/AdPlatform/model/types/adPlatforms';
+import { Platform } from '../../../../entities/Platform/model/types/platforms';
 
 export interface AddPlatformSchema {
-  data: AdPlatform[];
+  data: Platform[];
   isLoading: boolean;
-  error: string;
+  error?: string;
 }

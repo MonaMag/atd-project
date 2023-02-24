@@ -18,11 +18,17 @@ export interface CategoryItem {
   ageUpTo: number;
 }*/
 
-export interface CategorySchema {
+export interface Category {
   id: number;
   code: string;
   title: string;
   displayType: DisplayType;
   displayParams: DisplayParams;
   items: CategoryItem[] | [];
+}
+
+export interface CategorySchema {
+  data: Category[];
+  isLoading: boolean;
+  error?: string;
 }

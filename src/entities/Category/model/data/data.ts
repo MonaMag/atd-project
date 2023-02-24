@@ -1,6 +1,6 @@
-import { CategorySchema } from '../types/categories';
+import { Category } from '../types/categories';
 
-export function getData(): CategorySchema[] {
+export function getData(): Category[] {
   return [
     {
       id: 1,

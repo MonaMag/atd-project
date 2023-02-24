@@ -1,25 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { CategorySchema } from '../types/categories';
-import { ThunkConfig } from '../../../../app/providers/store/StateSchema';
-import { categoryActions } from '../slice/categorySlice';
 
-export const fetchCategory = createAsyncThunk<
-    CategorySchema,
-    void,
-    ThunkConfig<string>
->('category/fetchCategory', async (_, thunkApi) => {
-    const { extra, dispatch, rejectWithValue } = thunkApi;
+export const fetchCategory = createAsyncThunk<CategorySchema, undefined, { rejectValue: string }>(
+  'category/fetchCategory',
+  async (_, { rejectWithValue }) => {
+    const response = await fetch('http://192.168.233.153:8080/api/v1/util/info');
 
-    try {
-        const response = await extra.api.get<CategorySchema>('/categories');
-
-        if (!response.data) {
-            throw new Error();
-        }
-        dispatch(categoryActions.setCategory(response.data));
-        return response.data;
-    } catch (e) {
-        console.log(e);
-        return rejectWithValue('error');
+    if (!response.ok) {
+      return rejectWithValue('Server Error');
     }
-});
+
+    const data = await response.json();
+
+    return data;
+  },
+);
