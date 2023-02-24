@@ -10,8 +10,6 @@ import { SliderComponent } from '../SliderComponent/SliderComponent';
 import { AntTreeNodeCheckedEvent } from 'antd/es/tree';
 import { getFlatItems } from '../../../../shared/helper/getFlatItems';
 import { KEY_CHOOSE_All } from '../../model/consts/categoryConsts';
-import { useAppSelector } from '../../../../shared/hooks/useAppSelector';
-import { getCategoryData } from '../../model/selectors/getCategories';
 
 interface CategoryListProps {
   className?: string;
@@ -19,7 +17,6 @@ interface CategoryListProps {
 }
 
 const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
-  const categories = useAppSelector(getCategoryData);
   const flatItems = getFlatItems(category.items);
 
   const [searchValue, setSearchValue] = useState<string>('');

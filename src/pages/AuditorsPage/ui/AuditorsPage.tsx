@@ -34,8 +34,8 @@ const AuditorsPage: React.FC<AuditorPageProps> = ({ className }) => {
       <div className={cls.auditorsContent}>
         {isLoading && <h2>Loading...</h2>}
         {error && <h2>An error occurred: {error}</h2>}
-        {categories.map((category, index) => {
-          return <CategoryList key={index} category={category} />;
+        {categories.map((category) => {
+          return <CategoryList key={category.id} category={category} />;
         })}
       </div>
     </Page>
