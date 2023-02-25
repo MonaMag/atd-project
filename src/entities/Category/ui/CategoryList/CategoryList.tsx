@@ -23,7 +23,12 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
   const [value, setValue] = React.useState('include');
   const [includeCheckedKey, setIncludeCheckedKey] = useState<Key[]>([]);
   const [excludeCheckedKey, setExcludeCheckedKey] = useState<Key[]>([]);
+  const [sliderValues, setSliderValues] = useState<number[]>([]);
 
+  const handlerSlider = (value: number[]) => {
+    setSliderValues(value);
+    console.log(sliderValues);
+  };
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.currentTarget.value);
   };
@@ -104,7 +109,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
             }
           />
         ) : (
-          <SliderComponent />
+          <SliderComponent sliderValues={sliderValues} onChange={handlerSlider} />
         );
       case 'exclude':
         return (
@@ -140,10 +145,16 @@ const CategoryList: React.FC<CategoryListProps> = ({ category }) => {
             header={
               <div className={cls.collapseHeader}>
                 <div className={cls.headerTitle}>{category.title + ':'}</div>
+
                 <div className={cls.headerTagsWrapper}>
                   <div className={cls.tagsIncludeWrapper}>
                     {category.displayParams.enableExclude && includeCheckedKey.length > 0 && (
                       <span className={cls.headerSpan}>Включить: </span>
+                    )}
+                    {category.displayType === 'slider' && sliderValues.length > 0 && (
+                      <span className={cls.headerSpan}>
+                        {sliderValues[0] + ' -'} {sliderValues[1]}
+                      </span>
                     )}
                     {includeCheckedKey.length > 0 &&
                       includeCheckedKey
