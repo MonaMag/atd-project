@@ -3,10 +3,10 @@ import { Platform } from '../model/types/platforms';
 import { ColumnsType } from 'antd/es/table';
 import { Input, Table } from 'antd';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../../../shared/hooks/useAppDispatch';
 import { fetchPlatforms } from '../model/services/fetchPlatforms';
-import { getPlatforms } from '../../../feature/AddPlatformModal/model/selectors/getPlatforms';
+import { useAppSelector } from '../../../shared/hooks/useAppSelector';
+import { getPlatformList } from '../model/selectors/getPlatformList';
 
 interface PlatformListProps {
   className?: string;
@@ -16,7 +16,7 @@ interface PlatformListProps {
 
 export const PlatformList = ({ onDisabled, onSelectedRows }: PlatformListProps) => {
   const dispatch = useAppDispatch();
-  const platforms = useSelector(getPlatforms);
+  const platforms = useAppSelector(getPlatformList);
 
   const [dataSource, setDataSource] = useState<Platform[]>(platforms);
   const [editingKey, setEditingKey] = useState<string>('');
@@ -121,6 +121,7 @@ export const PlatformList = ({ onDisabled, onSelectedRows }: PlatformListProps) 
         }}
         pagination={false}
         dataSource={platforms}
+        rowKey={'id'}
         columns={columns}
         rowClassName="editable-row"
       />

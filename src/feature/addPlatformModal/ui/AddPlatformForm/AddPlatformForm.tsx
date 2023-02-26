@@ -88,9 +88,6 @@ export const AddPlatformForm = ({ onClose }: AddPlatformFormProps) => {
           </Form.Item>
 
           <Form.Item className={cls.item} name={'comment'} label={'Комментарий'}>
-            {/* <label htmlFor="comment" className={cls.inputLabel}>
-              Комментарий
-            </label>*/}
             <div className={cls.field}>
               <Input id="comment" type="text" className={cls.input} placeholder={'Комментарий'} />
             </div>

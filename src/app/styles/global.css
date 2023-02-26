@@ -47,7 +47,7 @@
 /*xl */
     --font-size-xl: 28px;
     --font-line-xl: 36px;
-    --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-main);
+    --font-xl: var(--font-size-xl) / var(--font-line-xl) var(--font-family-secondary);
 /* xxl */
     --font-size-xxl: 38px;
     --font-line-xxl: 44px;

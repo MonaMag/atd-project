@@ -2,14 +2,14 @@ import { UserSchema } from 'entities/User';
 import { CategorySchema } from '../../../entities/Category/model/types/categories';
 import { AxiosInstance } from 'axios';
 import { AppDispatch } from './store';
-import { AddPlatformSchema } from '../../../feature/AddPlatformModal/model/types/addPlatform';
 import { PlatformSchema } from '../../../entities/Platform/model/types/platforms';
+import { LoginSchema } from '../../../feature/authByUsername/model/types/login';
 
 export interface StateSchema {
   user: UserSchema;
   category: CategorySchema;
   platform: PlatformSchema;
-  addPlatform: AddPlatformSchema;
+  login: LoginSchema;
 }
 
 export interface ThunkExtraArg {

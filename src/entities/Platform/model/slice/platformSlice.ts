@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { PlatformSchema } from '../types/platforms';
 import { fetchPlatforms } from '../services/fetchPlatforms';
+import { addPlatforms } from '../../../../feature/addPlatformModal/model/services/addPlatforms';
 
 const initialState: PlatformSchema = {
   data: [
@@ -54,6 +55,18 @@ export const PlatformSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(fetchPlatforms.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(addPlatforms.pending, (state) => {
+        state.error = undefined;
+        state.isLoading = true;
+      })
+      .addCase(addPlatforms.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.data = action.payload;
+      })
+      .addCase(addPlatforms.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
