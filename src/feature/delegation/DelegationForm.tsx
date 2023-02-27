@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { Button, ButtonTheme } from '../../shared/ui/Button/Button';
 import cls from './DelegationForm.module.css';
-import { AddPlatformModal } from '../AddPlatformModal/ui/AddPlatformModal/AddPlatformModal';
+import { AddPlatformModal } from '../addPlatformModal/ui/AddPlatformModal/AddPlatformModal';
 import { PlatformList } from '../../entities/Platform/ui/PlatformList';
 import { Platform } from '../../entities/Platform/model/types/platforms';
 

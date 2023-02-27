@@ -4,29 +4,25 @@ import cls from './AppLink.module.css';
 import { classNames, Mods } from '../../classNames/classNames';
 
 interface AppLinkProps extends LinkProps {
-    className?: string;
-    children?: ReactNode;
-    to: string;
+  className?: string;
+  children?: ReactNode;
+  to: string;
 }
 
 // style={{background: match ? 'var(--select-bg-color)' : ''}}
 
 export const AppLink = memo((props: AppLinkProps) => {
-    const { to, className, children, ...otherProps } = props;
+  const { to, className, children, ...otherProps } = props;
 
-    const match = useMatch(to);
-    const active = match ? cls.active : '';
+  const match = useMatch(to);
+  const active = match ? cls.active : '';
 
-    const mods: Mods = {
-        [active]: active,
-    };
-    return (
-        <Link
-            to={to}
-            className={classNames(cls.appLink, mods, [className])}
-            {...otherProps}
-        >
-            {children}
-        </Link>
-    );
+  const mods: Mods = {
+    [active]: active,
+  };
+  return (
+    <Link to={to} className={classNames(cls.appLink, mods, [className])} {...otherProps}>
+      {children}
+    </Link>
+  );
 });

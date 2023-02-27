@@ -9,30 +9,33 @@ import { ReactComponent as AuditorsIcon } from '../../../../shared/assets/icons/
 import { ReactComponent as MagazineIcon } from '../../../../shared/assets/icons/magazine.svg';
 import cls from './Sidebar.module.css';
 import { DelegationModal } from '../../../../feature/delegation/DelegationModal';
+import { useLocation } from 'react-router-dom';
 
 interface SidebarProps {
   className?: string;
 }
 
 export const Sidebar = ({ className }: SidebarProps) => {
-  const [isCreateModal, setIsCreateModal] = useState(false);
+  let location = useLocation();
+  console.log('location', location);
 
+  const [isCreateModal, setIsCreateModal] = useState(false);
   const onShowModal = useCallback(() => {
     setIsCreateModal(true);
   }, []);
-
   const onCloseModal = useCallback(() => {
     setIsCreateModal(false);
   }, []);
-
   const handleEstimateVolume = () => {
     onShowModal();
   };
-
   const handleResetFilters = () => {
     console.log('ResetFilters');
   };
 
+  if (location.pathname === '/login') {
+    return <></>;
+  }
   return (
     <aside className={classNames(cls.Sidebar, {}, [className])}>
       <div className={cls.links}>
@@ -43,7 +46,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
           <UserIcon className={cls.sidebarIcon} />
           <span>Пользователи</span>
         </AppLink>
-        <AppLink to={'/'} className={cls.link}>
+        <AppLink to={'/auditors'} className={cls.link}>
           <AuditorsIcon className={cls.sidebarIcon} />
           Аудитории
         </AppLink>

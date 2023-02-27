@@ -16,8 +16,6 @@ interface AuditorPageProps {
   className?: string;
 }
 
-//const categories = getData();
-
 const AuditorsPage: React.FC<AuditorPageProps> = ({ className }) => {
   const dispatch = useAppDispatch();
   const categories = useAppSelector(getCategoryData);
